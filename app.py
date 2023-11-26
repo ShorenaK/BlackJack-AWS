@@ -54,7 +54,20 @@ def render_game():
     Renders the game state, upadates messages, displays cards.
     '''
     global MESSAGE, MESSAGE_DL, SUM, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER
-# WILL ADD THE CODE HERE  
+
+    # Display dealer's cards
+    dl_cards_tag = "Dealer's Cards: "
+    for card in CARD_DECK_DL:
+        dl_cards_tag += f'{card}'
+        
+    # Desplay player's cards
+    cards_tag = "Player's Cards: "
+    for card in CARD_DECK:
+        cards_tag += f'{card}'
+    
+    # Update total values
+    total_dl_tag = f'Total: {SUM_DL_CARDS}'
+    total_tag = f'{sum}'
 
 def new_card():
     '''
