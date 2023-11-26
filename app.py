@@ -32,7 +32,30 @@ def shuffle_new_card():
         return 11
     else:
         return random_num
-    
+
+def Kik_off_game():
+    '''
+    Starts the game by initializing player's and dealer's cards.
+    '''
+    global SUM, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, IS_IN_GAME
+    IS_IN_GAME = True
+    card_one = shuffle_new_card()
+    card_two = shuffle_new_card()
+    CARD_DECK = [card_one, card_two]
+    SUM = card_one + card_two
+    card_one_dl = shuffle_new_card()
+    card_two_dl = shuffle_new_card()
+    CARD_DECK_DL = [card_one_dl, card_two_dl]
+    SUM_DL_CARDS = card_one_dl + card_two_dl 
+    render_game()
+
+def render_game():
+    '''
+    Renders the game state, upadates messages, displays cards.
+    '''
+    global MESSAGE, MESSAGE_DL, SUM, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER
+# WILL ADD THE CODE HERE  
+
 
 @app.route('/')
 def index():
