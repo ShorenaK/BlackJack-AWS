@@ -4,14 +4,24 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title> Black Jack </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     </head>
     <body>
-       
-        
-        <script src="" async defer></script>
+        <h1><a style="color: gold;" href="{{ url_for('indexmain') }}"><strong>Enter Casino</strong></a></h1>
+       <div class="container"> 
+        <p id="dealer_card"> Dealer's Cards: </p>
+        <p id=" dealer_total"> Total: </p>
+        <h4 id="message-dealer"></h4>
+        <h4 id="message"> Player: </h4>
+        <p id="player-card"> Player's Cards: </p>
+        <p id="total"> Total: </p>
+        <button id="start_game" onclick="window.location.href='{{ url_for('game_action', action='startTheGame') }}'">START THE GAME</button>
+        <button id="new_card" onclick="window.location.href='{{ url_for('game_action', action='newCard') }}'">NEW CARD</button>
+        <h5 id="player_chips"></h5>
+        <button><a style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">End</a></button>
+       </div>
     </body>
 </html>
