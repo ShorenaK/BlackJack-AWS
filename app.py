@@ -10,7 +10,7 @@ SUM_DL_CARDS = 0
 HAS_BLACKJACK = False
 IS_IN_GAME = False
 MESSAGE_DL = []
-MASSAGE = ''
+MESSAGE = ''
 CARD_DECK = []
 CARD_DECK_DL = []
 PLAYER = {
@@ -33,7 +33,7 @@ def shuffle_new_card():
     else:
         return random_num
 
-def Kik_off_game():
+def start_game():
     '''
     Starts the game by initializing player's and dealer's cards.
     '''
@@ -56,10 +56,43 @@ def render_game():
     global MESSAGE, MESSAGE_DL, SUM, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER
 # WILL ADD THE CODE HERE  
 
+def new_card():
+    '''
+    Draws a new card for the player and updates two game state.
+    
+    '''
+    global SUM, CARD_DECK
+    if IS_IN_GAME and not HAS_BLACKJACK:
+        card = shuffle_new_card()
+        SUM += card
+        CARD_DECK.append(card)
+        render_game()
 
+# Flasl route for rendering the game page
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# Flask route for handling game actions
+@app.route('/game_action/action')
+def game_action(action):
+    '''
+    Handles game actions such as start the game or drawing a new card.
+    
+    Args:
+        action (str): The action to perform ('startTheGame' or 'newCard')
+    
+    Returns:
+        str: HTML page with the updated game state.
+    '''
+    global SUM, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK, CARD_DECK_DL, PLAYER
+    
+    if action == 'startTheGame':
+        start_game()
+    elif action == 'newCard':
+        new_card()
+        
+    return render_template('indext.html', message=MESSAGE, messageDl=MESSAGE_DL, total=SUM, totalDl=SUM_DL_CARDS, player_chips=PLAYER['chips'], cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL)
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True, use_reloader=True)
