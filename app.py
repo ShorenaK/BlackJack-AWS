@@ -91,12 +91,16 @@ def new_card():
         CARD_DECK.append(card)
         render_game()
 
-# Flasl route for rendering the game page
+# Flask route for rendering the game page
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# Flask route for rendering the main casino page
 @app.route('/indexmain')
-def
+def indexmain():
+    return render_template('indexmain.html')
+
 # Flask route for handling game actions
 @app.route('/game_action/action')
 def game_action(action):
