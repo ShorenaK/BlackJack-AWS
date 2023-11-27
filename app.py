@@ -58,16 +58,26 @@ def render_game():
     # Display dealer's cards
     dl_cards_tag = "Dealer's Cards: "
     for card in CARD_DECK_DL:
-        dl_cards_tag += f'{card}'
+        dl_cards_tag += f'{card} '
         
     # Desplay player's cards
     cards_tag = "Player's Cards: "
     for card in CARD_DECK:
-        cards_tag += f'{card}'
+        cards_tag += f'{card} '
     
     # Update total values
     total_dl_tag = f'Total: {SUM_DL_CARDS}'
-    total_tag = f'{sum}'
+    total_tag = f'Total: {SUM}'
+    
+    # Update message
+    message_dl = MESSAGE_DL if MESSAGE_DL else ''
+    message = MESSAGE if MESSAGE else ''
+    
+    # Update Player's chips
+    player_chips_tag = f"{PLAYER['name']} has {PLAYER['chips']} chips"
+    
+    return render_template('index.html', message=message, messageDl=message_dl, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag, cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL, dlCardsTag=dl_cards_tag, cardsTag=cards_tag)
+    
 
 def new_card():
     '''
@@ -85,7 +95,8 @@ def new_card():
 @app.route('/')
 def index():
     return render_template('index.html')
-
+@app.route('/indexmain')
+def
 # Flask route for handling game actions
 @app.route('/game_action/action')
 def game_action(action):
@@ -105,7 +116,7 @@ def game_action(action):
     elif action == 'newCard':
         new_card()
         
-    return render_template('indext.html', message=MESSAGE, messageDl=MESSAGE_DL, total=SUM, totalDl=SUM_DL_CARDS, player_chips=PLAYER['chips'], cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL)
+    return render_template('indexmain.html', message=MESSAGE, messageDl=MESSAGE_DL, total=SUM, totalDl=SUM_DL_CARDS, player_chips=PLAYER['chips'], cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL)
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True, use_reloader=True)
