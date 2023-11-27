@@ -1,5 +1,5 @@
 body{
-   background: crimson url(".images/image0.jpeg") no-repeat fixed center;
+   background: crimson url("{{ url_for('images', filename='image1.jpeg') }}") no-repeat fixed center;
    font-family: Georgia, 'Times New Roman', Times, serif;
    color: crimson;
    font-weight: bold; 
