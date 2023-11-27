@@ -11,5 +11,5 @@ body {
 
 .main_image {
    margin: auto;
-   max-width: 100%; /* Optional: Ensure the image doesn't exceed its container width */
+   max-width: 100%; 
 }
