@@ -1,5 +1,7 @@
 from flask import Flask, render_template, url_for
+from flask import redirect
 from random import randint
+
 
 app = Flask(__name__)
 
@@ -102,7 +104,7 @@ def indexmain():
     return render_template('indexmain.html')
 
 # Flask route for handling game actions
-@app.route('/game_action/action')
+@app.route('/game_action/<action>')
 def game_action(action):
     '''
     Handles game actions such as start the game or drawing a new card.
@@ -119,7 +121,10 @@ def game_action(action):
         start_game()
     elif action == 'newCard':
         new_card()
-        
+    return redirect(url_for('indexmain'))
+
+@app.route('/indexmain')
+def indexmain():
     return render_template('indexmain.html', message=MESSAGE, messageDl=MESSAGE_DL, total=SUM, totalDl=SUM_DL_CARDS, player_chips=PLAYER['chips'], cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL)
 
 if __name__ == "__main__":
