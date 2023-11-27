@@ -1,7 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from random import randint
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 # Initialize global variable
 CHIPS = 50
