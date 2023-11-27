@@ -30,5 +30,15 @@ h3 {
 }
 
 button{
-    
+    width: 120px;
+    align-items: flex-center;
+    align-self: center;
+    margin-top: 10px;
+    color: crimson;
+    text-decoration-color: brown;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    background-color: goldenrod;
+    font-weight: bold;
+    border-radius: 4px;
 }
