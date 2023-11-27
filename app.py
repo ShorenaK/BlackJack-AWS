@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for
 from random import randint
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__)
 
 # Initialize global variable
 CHIPS = 50
@@ -123,4 +123,4 @@ def game_action(action):
     return render_template('indexmain.html', message=MESSAGE, messageDl=MESSAGE_DL, total=SUM, totalDl=SUM_DL_CARDS, player_chips=PLAYER['chips'], cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL)
 
 if __name__ == "__main__":
-    app.run(port=8000, debug=True, use_reloader=True)
+    app.run(port=8008, debug=True, use_reloader=True)
