@@ -41,3 +41,7 @@ button {
     font-weight: bold;
     border-radius: 4px;
 }
+.main_image{
+    align-items: flex;
+    align-self: center;
+}
