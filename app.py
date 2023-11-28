@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, jsonify
+from flask import Flask, render_template, redirect, url_for, jsonify, render_template, request
 from random import randint
 
 app = Flask(__name__)
@@ -57,8 +57,52 @@ def start_game():
         'MESSAGE': MESSAGE,
         'PLAYER_CHIPS': PLAYER['chips'],
     })
-    
+# def render_game():
+#     '''
+#     Renders the game state, updates messages, and displays cards.
+#     '''
+#     global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
+#     # Display dealer's cards
+#     dl_cards_tag = "Dealer's Cards: "
+#     for card in CARD_DECK_DL:
+#         dl_cards_tag += f'{card} '
+        
+#     # Display player's cards
+#     cards_tag = "Player's Cards: "
+#     for card in CARD_DECK:
+#         cards_tag += f'{card} '
+    
+#     # Update total values
+#     total_dl_tag = f'Total: {SUM_DL_CARDS}'
+#     total_tag = f'Total: {SUM_PL_CARDS}'
+    
+#     # Update messages based on game logic
+#     if SUM_DL_CARDS == 21:
+#         MESSAGE_DL = "Table Wins Black Jack!!!"
+#         MESSAGE = "Player lost!"
+#         PLAYER['chips'] -= CHIPS
+#         IS_IN_GAME = False
+#     elif SUM_PL_CARDS == 21:
+#         MESSAGE = "Player wins Black Jack!!!"
+#         PLAYER['chips'] += CHIPS
+#         HAS_BLACKJACK = True
+#     elif SUM_PL_CARDS == SUM_DL_CARDS:
+#         MESSAGE_DL = "It's TIE"
+#         MESSAGE = "It's TIE"
+#     elif SUM_PL_CARDS <= 20:
+#         IS_IN_GAME = True
+#         MESSAGE = "Would you like to hit?"
+#     elif SUM_PL_CARDS > 21:
+#         MESSAGE = "Bust! You lost a Bet!"
+#         PLAYER['chips'] -= CHIPS
+#         IS_IN_GAME = False
+
+#     # Update Player's chips
+#     player_chips_tag = f"{PLAYER['name']} has {PLAYER['chips']} chips"
+    
+#     # Return HTML content as a response
+#     return render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag, cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL, dlCardsTag=dl_cards_tag, cardsTag=cards_tag)
 
 def render_game():
     '''
@@ -104,7 +148,15 @@ def render_game():
     # Update Player's chips
     player_chips_tag = f"{PLAYER['name']} has {PLAYER['chips']} chips"
     
-    return render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag, cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL, dlCardsTag=dl_cards_tag, cardsTag=cards_tag)
+    # Return HTML content as a response
+    return jsonify({
+        'SUM_DL_CARDS': SUM_DL_CARDS,
+        'SUM': SUM_PL_CARDS,
+        'MESSAGE_DL': MESSAGE_DL,
+        'MESSAGE': MESSAGE,
+        'PLAYER_CHIPS': PLAYER['chips'],
+        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag, cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL, dlCardsTag=dl_cards_tag, cardsTag=cards_tag),
+    })
 
 def new_card():
     '''
@@ -149,48 +201,10 @@ def game_action(action):
     global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK, CARD_DECK_DL, PLAYER
     
     if action == 'startTheGame':
-        start_game()
+        return start_game()
     elif action == 'newCard':
-        new_card()
-    return redirect(url_for('indexmain'))
+        return new_card()
 
 if __name__ == "__main__":
     app.run(port=8008, debug=True, use_reloader=True)
 
-
-
-
-
-
-
-
-
-
-# def render_game():
-#     '''
-#     Renders the game state, updates messages, and displays cards.
-#     '''
-#     global MESSAGE, MESSAGE_DL, SUM, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER
-
-#     # Display dealer's cards
-#     dl_cards_tag = "Dealer's Cards: "
-#     for card in CARD_DECK_DL:
-#         dl_cards_tag += f'{card} '
-        
-#     # Display player's cards
-#     cards_tag = "Player's Cards: "
-#     for card in CARD_DECK:
-#         cards_tag += f'{card} '
-    
-#     # Update total values
-#     total_dl_tag = f'Total: {SUM_DL_CARDS}'
-#     total_tag = f'Total: {SUM}'
-    
-#     # Update messages
-#     message_dl = MESSAGE_DL if MESSAGE_DL else ''
-#     message = MESSAGE if MESSAGE else ''
-    
-#     # Update Player's chips
-#     player_chips_tag = f"{PLAYER['name']} has {PLAYER['chips']} chips"
-    
-#     return render_template('index.html', message=message, messageDl=message_dl, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag, cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL, dlCardsTag=dl_cards_tag, cardsTag=cards_tag)
