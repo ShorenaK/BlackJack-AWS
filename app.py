@@ -37,7 +37,7 @@ def start_game():
     '''
     Starts the game by initializing player's and dealer's cards.
     '''
-    global  SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, IS_IN_GAME
+    global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, IS_IN_GAME
     IS_IN_GAME = True
     card_one_player = shuffle_new_card()
     card_two_player = shuffle_new_card()
@@ -56,7 +56,6 @@ def start_game():
         'MESSAGE_DL': MESSAGE_DL,  
         'MESSAGE': MESSAGE,
         'PLAYER_CHIPS': PLAYER['chips'],
-        # Add more data to be sent to the client if needed
     })
     
 
@@ -65,7 +64,7 @@ def render_game():
     '''
     Renders the game state, updates messages, and displays cards.
     '''
-    global MESSAGE, MESSAGE_DL,  SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
+    global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
     # Display dealer's cards
     dl_cards_tag = "Dealer's Cards: "
