@@ -1,11 +1,11 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, jsonify
 from random import randint
 
 app = Flask(__name__)
 
 # Initialize global variables
 CHIPS = 50
-SUM = 0
+SUM_PL_CARDS= 0
 SUM_DL_CARDS = 0 
 HAS_BLACKJACK = False
 IS_IN_GAME = False
@@ -37,24 +37,35 @@ def start_game():
     '''
     Starts the game by initializing player's and dealer's cards.
     '''
-    global SUM, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, IS_IN_GAME
+    global  SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, IS_IN_GAME
     IS_IN_GAME = True
-    card_one = shuffle_new_card()
-    card_two = shuffle_new_card()
-    CARD_DECK = [card_one, card_two]
-    SUM = card_one + card_two
+    card_one_player = shuffle_new_card()
+    card_two_player = shuffle_new_card()
+    CARD_DECK = [card_one_player, card_two_player]
+    SUM_PL_CARDS = card_one_player + card_two_player
+    
     card_one_dl = shuffle_new_card()
     card_two_dl = shuffle_new_card()
     CARD_DECK_DL = [card_one_dl, card_two_dl]
     SUM_DL_CARDS = card_one_dl + card_two_dl 
-    return render_game()
+    
+    # Return a JSON response with game state
+    return jsonify({
+        'SUM_DL_CARDS': SUM_DL_CARDS,
+        'SUM': SUM_PL_CARDS,
+        'MESSAGE_DL': MESSAGE_DL,  
+        'MESSAGE': MESSAGE,
+        'PLAYER_CHIPS': PLAYER['chips'],
+        # Add more data to be sent to the client if needed
+    })
+    
 
 
 def render_game():
     '''
     Renders the game state, updates messages, and displays cards.
     '''
-    global MESSAGE, MESSAGE_DL, SUM, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
+    global MESSAGE, MESSAGE_DL,  SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
     # Display dealer's cards
     dl_cards_tag = "Dealer's Cards: "
@@ -68,7 +79,7 @@ def render_game():
     
     # Update total values
     total_dl_tag = f'Total: {SUM_DL_CARDS}'
-    total_tag = f'Total: {SUM}'
+    total_tag = f'Total: {SUM_PL_CARDS}'
     
     # Update messages based on game logic
     if SUM_DL_CARDS == 21:
@@ -76,17 +87,17 @@ def render_game():
         MESSAGE = "Player lost!"
         PLAYER['chips'] -= CHIPS
         IS_IN_GAME = False
-    elif SUM == 21:
+    elif SUM_PL_CARDS == 21:
         MESSAGE = "Player wins Black Jack!!!"
         PLAYER['chips'] += CHIPS
         HAS_BLACKJACK = True
-    elif SUM == SUM_DL_CARDS:
+    elif SUM_PL_CARDS == SUM_DL_CARDS:
         MESSAGE_DL = "It's TIE"
         MESSAGE = "It's TIE"
-    elif SUM <= 20:
+    elif SUM_PL_CARDS <= 20:
         IS_IN_GAME = True
         MESSAGE = "Would you like to hit?"
-    elif SUM > 21:
+    elif SUM_PL_CARDS > 21:
         MESSAGE = "Bust! You lost a Bet!"
         PLAYER['chips'] -= CHIPS
         IS_IN_GAME = False
@@ -100,12 +111,19 @@ def new_card():
     '''
     Draws a new card for the player and updates the game state.
     '''
-    global SUM, CARD_DECK
+    global SUM_PL_CARDS, CARD_DECK
     if IS_IN_GAME and not HAS_BLACKJACK:
         card = shuffle_new_card()
-        SUM += card
+        SUM_PL_CARDS += card
         CARD_DECK.append(card)
-        return render_game()
+    
+    return jsonify({
+        'SUM_DL_CARDS': SUM_DL_CARDS,
+        'SUM_PL_CARDS': SUM_PL_CARDS,
+        'MESSAGE_DL': MESSAGE_DL,
+        'MESSAGE': MESSAGE,
+        'PLAYER_CHPS': PLAYER['chips'],  
+    })
 
 # Flask route for rendering the game page
 @app.route('/')
@@ -129,7 +147,7 @@ def game_action(action):
     Returns:
         str: HTML page with the updated game state.
     '''
-    global SUM, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK, CARD_DECK_DL, PLAYER
+    global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK, CARD_DECK_DL, PLAYER
     
     if action == 'startTheGame':
         start_game()
@@ -139,6 +157,15 @@ def game_action(action):
 
 if __name__ == "__main__":
     app.run(port=8008, debug=True, use_reloader=True)
+
+
+
+
+
+
+
+
+
 
 # def render_game():
 #     '''
