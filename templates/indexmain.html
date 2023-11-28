@@ -8,19 +8,69 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </head>
     <body>
-       <div class="container"> 
-        <p id="dealer_card"> Dealer's Cards: </p>
-        <p id=" dealer_total"> Total: </p>
-        <h4 id="message-dealer"></h4>
-        <h4 id="message"> Player: </h4>
-        <p id="player-card"> Player's Cards: </p>
-        <p id="total"> Total: </p>
-        <button id="start_game" onclick="window.location.href='{{ url_for('game_action', action='startTheGame') }}'">START THE GAME</button>
-        <button id="new_card" onclick="window.location.href='{{ url_for('game_action', action='newCard') }}'">NEW CARD</button>
-        <h5 id="player_chips"></h5>
-        <button><a style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">End</a></button>
-       </div>
-    </body>
+        <div class="container"> 
+            <p id="dealer_card"> Dealer's Cards: </p>
+            <p id="dealer_total"> Total: </p>
+            <h4 id="message-dealer"></h4>
+            <h4 id="message"> Player: </h4>
+            <p id="player-card"> Player's Cards: </p>
+            <p id="total"> Total: </p>
+            <button id="start_game" onclick="window.location.href='{{ url_for('game_action', action='startTheGame') }}'">START THE GAME</button>
+            <button id="new_card" onclick="window.location.href='{{ url_for('game_action', action='newCard') }}'">NEW CARD</button>
+            <h5 id="player_chips"></h5>
+            <button><a style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">End</a></button>
+        </div>
+        <script>
+            // Function to start the game
+            function startGame() {
+                $.ajax({
+                    url: "/game_action/startTheGame",
+                    type: "GET",
+                    dataType: "json", // Expect JSON response
+                    success: function (response) {
+                        // Handle the JSON response
+                        console.log(response);
+                        // Update your UI with the data from the response
+                        updateUI(response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+            
+            // Function to draw a new card
+            function drawNewCard() {
+                $.ajax({
+                    url: "/game_action/newCard",
+                    type: "GET",
+                    dataType: "json", // Expect JSON response
+                    success: function (response) {
+                        // Handle the JSON response
+                        console.log(response);
+                        // Update your UI with the data from the response
+                        updateUI(response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+            
+            // Update the UI with the data from the server response
+            function updateUI(data) {
+                // Example: Update total values
+                $("#dealer_total").text("Total: " + data.SUM_DL_CARDS);
+                $("#total").text("Total: " + data.SUM);
+                // Add more updates as needed
+            }
+            
+            // Attach click event listeners to the buttons
+            $("#start_game").click(startGame);
+            $("#new_card").click(drawNewCard);
+            </script>
+            </body>
 </html>
