@@ -52,7 +52,7 @@ def start_game():
     # Return a JSON response with game state
     return jsonify({
         'SUM_DL_CARDS': SUM_DL_CARDS,
-        'SUM': SUM_PL_CARDS,
+        'SUM_PL_CARDS': SUM_PL_CARDS,
         'MESSAGE_DL': MESSAGE_DL,  
         'MESSAGE': MESSAGE,
         'PLAYER_CHIPS': PLAYER['chips'],
@@ -103,23 +103,12 @@ def start_game():
     
 #     # Return HTML content as a response
 #     return render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag, cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL, dlCardsTag=dl_cards_tag, cardsTag=cards_tag)
-
 def render_game():
     '''
     Renders the game state, updates messages, and displays cards.
     '''
     global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
-    # Display dealer's cards
-    dl_cards_tag = "Dealer's Cards: "
-    for card in CARD_DECK_DL:
-        dl_cards_tag += f'{card} '
-        
-    # Display player's cards
-    cards_tag = "Player's Cards: "
-    for card in CARD_DECK:
-        cards_tag += f'{card} '
-    
     # Update total values
     total_dl_tag = f'Total: {SUM_DL_CARDS}'
     total_tag = f'Total: {SUM_PL_CARDS}'
@@ -151,11 +140,13 @@ def render_game():
     # Return HTML content as a response
     return jsonify({
         'SUM_DL_CARDS': SUM_DL_CARDS,
-        'SUM': SUM_PL_CARDS,
+        'SUM_PL_CARDS': SUM_PL_CARDS, 
         'MESSAGE_DL': MESSAGE_DL,
         'MESSAGE': MESSAGE,
         'PLAYER_CHIPS': PLAYER['chips'],
-        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag, cardDeck=CARD_DECK, cardDeckDl=CARD_DECK_DL, dlCardsTag=dl_cards_tag, cardsTag=cards_tag),
+        'CARD_DECK': CARD_DECK,  # Pass the array of player's cards to the template
+        'CARD_DECK_DL': CARD_DECK_DL,  # Pass the array of dealer's cards to the template
+        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag),
     })
 
 def new_card():
