@@ -52,6 +52,8 @@ def start_game():
     
     # Return a JSON response with game state
     return jsonify({
+        'CARD_DECK_Pl': CARD_DECK_Pl,
+        'CARD_DECK_DL': CARD_DECK_DL,
         'SUM_DL_CARDS': SUM_DL_CARDS,
         'SUM_PL_CARDS': SUM_PL_CARDS,
         'MESSAGE_DL': MESSAGE_DL,  
@@ -66,8 +68,9 @@ def render_game():
     global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
     # Update total values
+  
     total_dl_tag = f'Total: {SUM_DL_CARDS}'
-    total_tag = f'Total: {SUM_PL_CARDS}'
+    total_pl_tag = f'Total: {SUM_PL_CARDS}'
     
     # Update messages based on game logic
     if SUM_DL_CARDS == 21:
@@ -95,10 +98,14 @@ def render_game():
         IS_IN_GAME = False
 
     # Update Player's chips
+    players_card = CARD_DECK_Pl
+    dealers_card = CARD_DECK_DL
     player_chips_tag = f"{PLAYER['name']} has {PLAYER['chips']} chips"
     
     # Return HTML content as a response
     return jsonify({
+        'CARD_DECK_Pl': CARD_DECK_Pl,
+        'CARD_DECK_DL': CARD_DECK_DL,
         'SUM_DL_CARDS': SUM_DL_CARDS,
         'SUM_PL_CARDS': SUM_PL_CARDS, 
         'MESSAGE_DL': MESSAGE_DL,
@@ -106,7 +113,7 @@ def render_game():
         'PLAYER_CHIPS': PLAYER['chips'],
         'CARD_DECK_PL': CARD_DECK_Pl,  # Pass the array of player's cards to the template
         'CARD_DECK_DL': CARD_DECK_DL,  # Pass the array of dealer's cards to the template
-        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag),
+        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, cardsPl = players_card, cardsDl = dealers_card, totalPl = total_pl_tag, totalDl = total_dl_tag, player_chips = player_chips_tag),
     })
 
 def new_card():

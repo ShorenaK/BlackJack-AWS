@@ -11,15 +11,20 @@
 </head>
 <body>
     <div class="container">
-        <p id="dealer_card">Dealer's Cards: {{ dlCardsTag }}</p>
+        <p id="dealer_card">Dealer's Cards: {{ cardsDl }}</p>
+
         <p id="dealer_total">Total: {{ totalDl }}</p>
         
+
         <h4 id="message-dealer">{{ messageDl }}</h4>
 
-        <h4 id="message">Player: {{ cardsTag }}</h4>
+        <!-- <h4 id="message">Player: {{ cardsTag }}</h4> -->
 
-        <p id="player_card">Player's Cards: {{ plCardsTag }}</p>
-        <p id="player_total">Total: {{ total }}</p>
+
+        <p id="player_card">Player's Cards: {{ cardsPl }}</p>
+
+        <p id="player_total">Total: {{ totalPl }}</p> 
+
         <h5 id="player_chips">{{ player_chips }}</h5>
 
 
@@ -61,9 +66,13 @@
         }
 
         function updateUI(data) {
+            $("#dealer_card").text("Dealer's Cards: " + data.CARD_DECK_Pl);
             $("#dealer_total").text("Total: " + data.SUM_DL_CARDS);
+            
             $("#player_total").text("Total: " + data.SUM_PL_CARDS);
             
+
+
 
             $("#message-dealer").text(data.MESSAGE_DL);
 
