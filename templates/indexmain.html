@@ -24,6 +24,7 @@
         <p id="player_total" style="color: blueviolet;">Total: {{ totalPl }}</p> 
 
 
+        <h5 id="player_name">{{ player_name }}</h5>
         <h5 id="player_chips">{{ player_chips }}</h5>
 
 
@@ -80,6 +81,7 @@
 
             $("#message").text(data.MESSAGE);
 
+            $("#player_name").text(data.PLAYER_NAME);
             $("#player_chips").text(data.PLAYER_CHIPS);
 
             $("#dealer_card").text("Dealer's Cards: " + data.dlCardsTag);
