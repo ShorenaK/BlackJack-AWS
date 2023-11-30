@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <p id="dealer_cards">Dealer's Cards: {{ cardsDl }}</p>
-        <p id="dealer_total">Total: {{ totalDl }}</p>
+        <p id="dealer_total" style="color: blueviolet;"> Total: {{ totalDl }}</p>
         
 
         <h4 id="message-dealer">{{ messageDl }}</h4>
@@ -21,7 +21,7 @@
 
 
         <p id="player_cards">Player's Cards: {{ cardsPl }}</p>
-        <p id="player_total">Total: {{ totalPl }}</p> 
+        <p id="player_total" style="color: blueviolet;">Total: {{ totalPl }}</p> 
 
 
         <h5 id="player_chips">{{ player_chips }}</h5>
@@ -71,7 +71,7 @@
 
 
             $("#player_total").text("Total: " + data.SUM_PL_CARDS);
-            $("#player_cards").text("Total: " + CARD_DECK_Pl);
+            $("#player_cards").text("Player's Cards: " + data.CARD_DECK_Pl);
             
 
 
