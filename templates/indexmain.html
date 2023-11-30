@@ -13,15 +13,22 @@
     <div class="container">
         <p id="dealer_card">Dealer's Cards: {{ dlCardsTag }}</p>
         <p id="dealer_total">Total: {{ totalDl }}</p>
+        
         <h4 id="message-dealer">{{ messageDl }}</h4>
+
         <h4 id="message">Player: {{ cardsTag }}</h4>
-        <p id="total">Total: {{ total }}</p>
+
+        <p id="player_card">Player's Cards: {{ plCardsTag }}</p>
+        <p id="player_total">Total: {{ total }}</p>
         <h5 id="player_chips">{{ player_chips }}</h5>
+
+
         <button id="start_game">START THE GAME</button>
         <button id="new_card">NEW CARD</button>
         <button><a style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">End</a></button>
     </div>
 
+ <!-- comment needs to be added here  -->
     <script>
         function startGame() {
             $.ajax({
@@ -55,20 +62,26 @@
 
         function updateUI(data) {
             $("#dealer_total").text("Total: " + data.SUM_DL_CARDS);
-            $("#total").text("Total: " + data.SUM_PL_CARDS);
-            $("#message-dealer").text(data.MESSAGE_DL);
-            $("#message").text(data.MESSAGE);
-            $("#player_chips").text(data.PLAYER_CHIPS);
-            $("#dealer_card").text("Dealer's Cards: " + data.dlCardsTag);
-            $("#player-card").text("Player's Cards: " + data.cardsTag);
-            // Add more updates as needed
-        }
+            $("#player_total").text("Total: " + data.SUM_PL_CARDS);
+            
 
+            $("#message-dealer").text(data.MESSAGE_DL);
+
+            $("#message").text(data.MESSAGE);
+
+            $("#player_chips").text(data.PLAYER_CHIPS);
+
+            $("#dealer_card").text("Dealer's Cards: " + data.dlCardsTag);
+            $("#player_card").text("Player's Cards: " + data.plcardsTag);
+            
+        }
+        // click events for startGame and drawNewCard buttons
         $(document).ready(function () {
             $("#start_game").click(startGame);
             $("#new_card").click(drawNewCard);
         });
     </script>
+
 </body>
 </html>
 

@@ -11,7 +11,7 @@ HAS_BLACKJACK = False
 IS_IN_GAME = False
 MESSAGE_DL = []
 MESSAGE = ''
-CARD_DECK = []
+CARD_DECK_Pl = []
 CARD_DECK_DL = []
 PLAYER = {
     'name': 'Player',
@@ -32,16 +32,17 @@ def shuffle_new_card():
         return 11
     else:
         return random_num
+    
 
 def start_game():
     '''
     Starts the game by initializing player's and dealer's cards.
     '''
-    global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, IS_IN_GAME
+    global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, CARD_DECK_DL, IS_IN_GAME
     IS_IN_GAME = True
     card_one_player = shuffle_new_card()
     card_two_player = shuffle_new_card()
-    CARD_DECK = [card_one_player, card_two_player]
+    CARD_DECK_Pl = [card_one_player, card_two_player]
     SUM_PL_CARDS = card_one_player + card_two_player
     
     card_one_dl = shuffle_new_card()
@@ -62,7 +63,7 @@ def render_game():
     '''
     Renders the game state, updates messages, and displays cards.
     '''
-    global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
+    global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
     # Update total values
     total_dl_tag = f'Total: {SUM_DL_CARDS}'
@@ -74,16 +75,20 @@ def render_game():
         MESSAGE = "Player lost!"
         PLAYER['chips'] -= CHIPS
         IS_IN_GAME = False
+        
     elif SUM_PL_CARDS == 21:
         MESSAGE = "Player wins Black Jack!!!"
         PLAYER['chips'] += CHIPS
         HAS_BLACKJACK = True
+        
     elif SUM_PL_CARDS == SUM_DL_CARDS:
         MESSAGE_DL = "It's TIE"
         MESSAGE = "It's TIE"
+        
     elif SUM_PL_CARDS <= 20:
         IS_IN_GAME = True
         MESSAGE = "Would you like to hit?"
+        
     elif SUM_PL_CARDS > 21:
         MESSAGE = "Bust! You lost a Bet!"
         PLAYER['chips'] -= CHIPS
@@ -99,7 +104,7 @@ def render_game():
         'MESSAGE_DL': MESSAGE_DL,
         'MESSAGE': MESSAGE,
         'PLAYER_CHIPS': PLAYER['chips'],
-        'CARD_DECK': CARD_DECK,  # Pass the array of player's cards to the template
+        'CARD_DECK_PL': CARD_DECK_Pl,  # Pass the array of player's cards to the template
         'CARD_DECK_DL': CARD_DECK_DL,  # Pass the array of dealer's cards to the template
         'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, total=total_tag, totalDl=total_dl_tag, player_chips=player_chips_tag),
     })
@@ -108,11 +113,11 @@ def new_card():
     '''
     Draws a new card for the player and updates the game state.
     '''
-    global SUM_PL_CARDS, CARD_DECK
+    global SUM_PL_CARDS, CARD_DECK_Pl
     if IS_IN_GAME and not HAS_BLACKJACK:
         card = shuffle_new_card()
         SUM_PL_CARDS += card
-        CARD_DECK.append(card)
+        CARD_DECK_Pl.append(card)
     
     return jsonify({
         'SUM_DL_CARDS': SUM_DL_CARDS,
@@ -144,7 +149,7 @@ def game_action(action):
     Returns:
         str: HTML page with the updated game state.
     '''
-    global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK, CARD_DECK_DL, PLAYER
+    global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK_Pl, CARD_DECK_DL, PLAYER
     
     if action == 'startTheGame':
         return start_game()
