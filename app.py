@@ -68,7 +68,8 @@ def render_game():
     global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, CARD_DECK_DL, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
     # Update total values
-  
+    dealers_card = CARD_DECK_DL
+    players_card = CARD_DECK_Pl
     total_dl_tag = f'Total: {SUM_DL_CARDS}'
     total_pl_tag = f'Total: {SUM_PL_CARDS}'
     
