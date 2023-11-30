@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
+    <h3><em> Balck Jack Table! </em></h3>
     <div class="container">
         <p id="dealer_cards">Dealer's Cards: {{ cardsDl }}</p>
         <p id="dealer_total" style="color: blueviolet;"> Total: {{ totalDl }}</p>
@@ -23,9 +24,7 @@
         <p id="player_cards">Player's Cards: {{ cardsPl }}</p>
         <p id="player_total" style="color: blueviolet;">Total: {{ totalPl }}</p> 
 
-
-        <h5 id="player_name">{{ player_name }}</h5>
-        <h5 id="player_chips">{{ player_chips }}</h5>
+        <h5 id="player_name_chips"> </h5>
 
 
         <button id="start_game">START THE GAME</button>
@@ -81,8 +80,9 @@
 
             $("#message").text(data.MESSAGE);
 
-            $("#player_name").text(data.PLAYER_NAME);
-            $("#player_chips").text(data.PLAYER_CHIPS);
+            
+             $("#player_name_chips").text(data.PLAYER_NAME + " has " + data.PLAYER_CHIPS + " chips");
+
 
             $("#dealer_card").text("Dealer's Cards: " + data.dlCardsTag);
             $("#player_card").text("Player's Cards: " + data.plcardsTag);

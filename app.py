@@ -107,8 +107,6 @@ def render_game():
     players_card = CARD_DECK_Pl
     dealers_card = CARD_DECK_Dl
     
-    #  Players intial 1000 chips 
-    player_chips_tag = f"{PLAYER['name']} has {PLAYER['chips']} chips"
     
     # Return HTML content as a response
     return jsonify({
@@ -120,10 +118,11 @@ def render_game():
         'MESSAGE_DL': MESSAGE_DL,
         'MESSAGE': MESSAGE,
         
+       
         'PLAYER_NAME': PLAYER['name'],
         'PLAYER_CHIPS': PLAYER['chips'],
         
-        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, cardsPl = players_card, cardsDl = dealers_card, totalPl = total_pl_tag, totalDl = total_dl_tag, player_name_chips = player_chips_tag),
+        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, cardsPl = players_card, cardsDl = dealers_card, totalPl = total_pl_tag, totalDl = total_dl_tag),
     })
 
 def new_card():
