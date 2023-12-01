@@ -106,6 +106,9 @@ def render_game():
     # players_card = CARD_DECK_Pl
     # dealers_card = CARD_DECK_Dl
     
+    print("MESSAGE_DL:", MESSAGE_DL)
+    print("MESSAGE:", MESSAGE)
+    print("PLAYER CHIPS:", PLAYER['chips'])
     
     # Return HTML content as a response
     return jsonify({
