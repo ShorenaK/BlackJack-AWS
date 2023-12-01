@@ -132,16 +132,18 @@ def new_card():
     global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, MESSAGE, MESSAGE_DL, PLAYER, IS_IN_GAME, HAS_BLACKJACK
     
     if IS_IN_GAME and not HAS_BLACKJACK:
-        card = shuffle_new_card()
-        SUM_PL_CARDS += card
-        CARD_DECK_Pl.append(card)
+        player_card = shuffle_new_card()
+        SUM_PL_CARDS += player_card
+        CARD_DECK_Pl.append(player_card)
     
     return jsonify({
         'SUM_DL_CARDS': SUM_DL_CARDS,
         'SUM_PL_CARDS': SUM_PL_CARDS,
         'MESSAGE_DL': MESSAGE_DL,
         'MESSAGE': MESSAGE,
-        'PLAYER_CHPS': PLAYER['chips'],  
+        'PLAYER_CHPS': PLAYER['chips'], 
+        'CARD_DECK_Pl': CARD_DECK_Pl,
+         
     })
 
 # Flask route for rendering the game page
