@@ -103,8 +103,8 @@ def render_game():
         IS_IN_GAME = False
 
     # Update Player's chips
-    players_card = CARD_DECK_Pl
-    dealers_card = CARD_DECK_Dl
+    # players_card = CARD_DECK_Pl
+    # dealers_card = CARD_DECK_Dl
     
     
     # Return HTML content as a response
@@ -113,16 +113,13 @@ def render_game():
         'CARD_DECK_Dl': CARD_DECK_Dl,
         'SUM_DL_CARDS': SUM_DL_CARDS,
         'SUM_PL_CARDS': SUM_PL_CARDS, 
-        
         'MESSAGE_DL': MESSAGE_DL,
         'MESSAGE': MESSAGE,
-        
-       
         'PLAYER_NAME': PLAYER['name'],
         'PLAYER_CHIPS': PLAYER['chips'],
-        
-        'HTML_CONTENT': render_template('index.html', message = MESSAGE, messageDl = MESSAGE_DL, cardsPl = players_card, cardsDl = dealers_card, totalPl = total_pl_tag, totalDl = total_dl_tag),
+        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL,totalPl=total_pl_tag, totalDl=total_dl_tag),
     })
+    
 
 def new_card():
     '''
