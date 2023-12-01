@@ -128,7 +128,8 @@ def new_card():
     '''
     Draws a new card for the player and updates the game state.
     '''
-    global SUM_PL_CARDS, CARD_DECK_Pl
+    global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, MESSAGE, MESSAGE_DL, PLAYER, IS_IN_GAME, HAS_BLACKJACK
+    
     if IS_IN_GAME and not HAS_BLACKJACK:
         card = shuffle_new_card()
         SUM_PL_CARDS += card
@@ -164,7 +165,7 @@ def game_action(action):
     Returns:
         str: HTML page with the updated game state.
     '''
-    # global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK_Pl, CARD_DECK_Dl, PLAYER
+    global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK_Pl, CARD_DECK_Dl, PLAYER
     
     if action == 'startTheGame':
         return start_game()
