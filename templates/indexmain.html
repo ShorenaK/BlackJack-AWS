@@ -20,7 +20,6 @@
         <h4 id="message"> {{ message }} </h4>
         
 
-        <!-- <h4 id="message">Player: {{ cardsTag }}</h4> -->
 
 
         <p id="player_cards">Player's Cards: {{ cardsPl }}</p>
@@ -70,14 +69,9 @@
 
             $("#dealer_cards").text("Dealer's Cards: " + data.CARD_DECK_Dl);
             $("#dealer_total").text("Total: " + data.SUM_DL_CARDS);
-
-
             $("#player_total").text("Total: " + data.SUM_PL_CARDS);
             $("#player_cards").text("Player's Cards: " + data.CARD_DECK_Pl);
             
-
-
-
             $("#message-dealer").text(data.MESSAGE_DL);
 
             $("#message").text(data.MESSAGE);
@@ -85,9 +79,6 @@
             
              $("#player_name_chips").text(data.PLAYER_NAME + " has " + data.PLAYER_CHIPS + " chips");
 
-
-            // $("#dealer_card").text("Dealer's Cards: " + data.CARD_DECK_Dl);
-            // $("#player_card").text("Player's Cards: " + data.CARD_DECK_Pl);
             
         }
         // click events for startGame and drawNewCard buttons

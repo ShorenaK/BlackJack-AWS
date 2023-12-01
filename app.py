@@ -135,6 +135,9 @@ def new_card():
         player_card = shuffle_new_card()
         SUM_PL_CARDS += player_card
         CARD_DECK_Pl.append(player_card)
+        return render_game()
+    
+    print("new card:", player_card)
     
     return jsonify({
         'SUM_DL_CARDS': SUM_DL_CARDS,
