@@ -9,7 +9,7 @@ SUM_PL_CARDS= 0
 SUM_DL_CARDS = 0 
 HAS_BLACKJACK = False
 IS_IN_GAME = False
-MESSAGE_DL = []
+MESSAGE_DL = ''
 MESSAGE = ''
 CARD_DECK_Pl = []
 CARD_DECK_Dl = []
@@ -91,7 +91,6 @@ def render_game():
         HAS_BLACKJACK = True
         
     elif SUM_PL_CARDS == SUM_DL_CARDS:
-        MESSAGE_DL = "It's TIE"
         MESSAGE = "It's TIE"
         
     elif SUM_PL_CARDS <= 20:
@@ -122,7 +121,7 @@ def render_game():
         'PLAYER_NAME': PLAYER['name'],
         'PLAYER_CHIPS': PLAYER['chips'],
         
-        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL, cardsPl = players_card, cardsDl = dealers_card, totalPl = total_pl_tag, totalDl = total_dl_tag),
+        'HTML_CONTENT': render_template('index.html', message = MESSAGE, messageDl = MESSAGE_DL, cardsPl = players_card, cardsDl = dealers_card, totalPl = total_pl_tag, totalDl = total_dl_tag),
     })
 
 def new_card():
@@ -165,7 +164,7 @@ def game_action(action):
     Returns:
         str: HTML page with the updated game state.
     '''
-    global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK_Pl, CARD_DECK_Dl, PLAYER
+    # global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK_Pl, CARD_DECK_Dl, PLAYER
     
     if action == 'startTheGame':
         return start_game()
