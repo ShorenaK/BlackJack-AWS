@@ -14,26 +14,15 @@
     <div class="container">
         <p id="dealer_cards">Dealer's Cards: {{ cardsDl }}</p>
         <p id="dealer_total" style="color: blueviolet;"> Total: {{ totalDl }}</p>
-        
-
         <h4 id="message-dealer"> {{ messageDl }} </h4>
         <h4 id="message"> {{ message }} </h4>
-        
-
-
-
         <p id="player_cards">Player's Cards: {{ cardsPl }}</p>
         <p id="player_total" style="color: blueviolet;">Total: {{ totalPl }}</p> 
-
         <h5 id="player_name_chips"> </h5>
-
-
         <button id="start_game">START THE GAME</button>
         <button id="new_card">NEW CARD</button>
-
         <button><a style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">End the Game</a></button>
     </div>
-
  <!-- comment needs to be added here  -->
     <script>
 // jQuery for making asynchronous HTTP requests to start the game.
@@ -51,9 +40,7 @@
                 }
             });
         }
-
 // jQuery for making asynchronous HTTP requests for new card.
-
         function drawNewCard() {
             $.ajax({
                 url: "/game_action/newCard", 
@@ -70,39 +57,22 @@
         }
 
         function updateUI(data) {
-
             $("#dealer_cards").text("Dealer's Cards: " + data.CARD_DECK_Dl);
             $("#dealer_total").text("Total: " + data.SUM_DL_CARDS);
-            
             $("#player_total").text("Total: " + data.SUM_PL_CARDS);
-            
-            
-            // let playerCards = data.CARD_DECK_Dl.split(' ')
-            // let newPlayerCard = playerCards[playerCards.length -1]
-            
-
-            
-            $("#player_cards").text("Player's Cards: " + data.CARD_DECK_Pl);
-            
-            // $("#player_cards").text("Player's Cards: " + playerCards.join(' '));
-
-
+            let playerCardsString = data.CARD_DECK_Pl
+            let playerCardsString
+            $("#player_cards").text("Player's Cards: " + )
             $("#message-dealer").text(data.MESSAGE_DL)
-            $("#message").text(data.MESSAGE);
-
-            
-             $("#player_name_chips").text(data.PLAYER_NAME + " has " + data.PLAYER_CHIPS + " chips");
-
-            
+            $("#message").text(data.MESSAGE) 
+            $("#player_name_chips").text(data.PLAYER_NAME + " has " + data.PLAYER_CHIPS + " chips");
         }
         // click events for startGame and drawNewCard buttons
         $(document).ready(function () {
             $("#start_game").click(startGame);
             $("#new_card").click(drawNewCard);
         });
-
     </script>
-
 </body>
 </html>
 
