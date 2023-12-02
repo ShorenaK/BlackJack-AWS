@@ -30,11 +30,13 @@
 
         <button id="start_game">START THE GAME</button>
         <button id="new_card">NEW CARD</button>
-        <button><a style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">End</a></button>
+
+        <button><a style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">End the Game</a></button>
     </div>
 
  <!-- comment needs to be added here  -->
     <script>
+// jQuery for making asynchronous HTTP requests to start the game.
         function startGame() {
             $.ajax({
                 url: "/game_action/startTheGame",
@@ -50,9 +52,11 @@
             });
         }
 
+// jQuery for making asynchronous HTTP requests for new card.
+
         function drawNewCard() {
             $.ajax({
-                url: "/game_action/newCard",
+                url: "/game_action/newCard", 
                 type: "GET",
                 dataType: "json",
                 success: function (response) {
@@ -69,11 +73,21 @@
 
             $("#dealer_cards").text("Dealer's Cards: " + data.CARD_DECK_Dl);
             $("#dealer_total").text("Total: " + data.SUM_DL_CARDS);
+            
             $("#player_total").text("Total: " + data.SUM_PL_CARDS);
+            
+            
+            // let playerCards = data.CARD_DECK_Dl.split(' ')
+            // let newPlayerCard = playerCards[playerCards.length -1]
+            
+
+            
             $("#player_cards").text("Player's Cards: " + data.CARD_DECK_Pl);
             
-            $("#message-dealer").text(data.MESSAGE_DL);
+            // $("#player_cards").text("Player's Cards: " + playerCards.join(' '));
 
+
+            $("#message-dealer").text(data.MESSAGE_DL)
             $("#message").text(data.MESSAGE);
 
             
@@ -86,6 +100,7 @@
             $("#start_game").click(startGame);
             $("#new_card").click(drawNewCard);
         });
+
     </script>
 
 </body>

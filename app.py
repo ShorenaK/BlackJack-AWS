@@ -43,7 +43,7 @@ def start_game():
     card_one_player = shuffle_new_card()
     card_two_player = shuffle_new_card()
     CARD_DECK_Pl = [card_one_player, card_two_player]
-    CARD_DECK_Pl = f"{card_one_player} {card_two_player}"
+    # CARD_DECK_Pl = f"{card_one_player} {card_two_player}"
     SUM_PL_CARDS = card_one_player + card_two_player
 
     card_one_dl = shuffle_new_card()
@@ -131,6 +131,9 @@ def new_card():
     '''
     global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, MESSAGE, MESSAGE_DL, PLAYER, IS_IN_GAME, HAS_BLACKJACK
     
+    # Default value of new card
+    player_card = None
+    
     if IS_IN_GAME and not HAS_BLACKJACK:
         player_card = shuffle_new_card()
         SUM_PL_CARDS += player_card
@@ -176,6 +179,7 @@ def game_action(action):
     if action == 'startTheGame':
         start_game()
         return render_game()
+    
     elif action == 'newCard':
         new_card()
         return render_game()
