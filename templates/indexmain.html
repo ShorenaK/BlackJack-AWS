@@ -60,8 +60,7 @@
             $("#dealer_cards").text("Dealer's Cards: " + data.CARD_DECK_Dl);
             $("#dealer_total").text("Total: " + data.SUM_DL_CARDS);
             $("#player_total").text("Total: " + data.SUM_PL_CARDS);
-            let playerCardsString = data.CARD_DECK_Pl
-            let playerCardsArray = playerCardsString.plit(',')
+            let playerCardsArray = data.CARD_DECK_Pl
             let formattedPlayerCards = playerCardsArray.join(' ')
             $("#player_cards").text("Player's Cards: " + formattedPlayerCards)
             $("#message-dealer").text(data.MESSAGE_DL)
