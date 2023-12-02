@@ -23,7 +23,6 @@
         <button id="new_card">NEW CARD</button>
         <button><a style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">End the Game</a></button>
     </div>
- <!-- comment needs to be added here  -->
     <script>
 // jQuery for making asynchronous HTTP requests to start the game.
         function startGame() {
@@ -55,7 +54,7 @@
                 }
             });
         }
-
+// Function to update the user interface based on the received data.
         function updateUI(data) {
             $("#dealer_cards").text("Dealer's Cards: " + data.CARD_DECK_Dl);
             $("#dealer_total").text("Total: " + data.SUM_DL_CARDS);
@@ -67,7 +66,7 @@
             $("#message").text(data.MESSAGE) 
             $("#player_name_chips").text(data.PLAYER_NAME + " has " + data.PLAYER_CHIPS + " chips");
         }
-        // click events for startGame and drawNewCard buttons
+        // Click events for startGame and drawNewCard buttons
         $(document).ready(function () {
             $("#start_game").click(startGame);
             $("#new_card").click(drawNewCard);

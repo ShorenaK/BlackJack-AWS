@@ -72,10 +72,6 @@ def render_game():
     '''
     global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, CARD_DECK_Dl, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
-    # Update total values
-    dealers_card = CARD_DECK_Dl
-    players_card = CARD_DECK_Pl
-    
     total_dl_tag = f'Total: {SUM_DL_CARDS}'
     total_pl_tag = f'Total: {SUM_PL_CARDS}'
     
@@ -102,14 +98,6 @@ def render_game():
         MESSAGE = "Bust! You lost a Bet!"
         PLAYER['chips'] -= CHIPS
         IS_IN_GAME = False
-
-    # Update Player's chips
-    players_card = CARD_DECK_Pl
-    dealers_card = CARD_DECK_Dl
-    
-    print("MESSAGE_DL:", MESSAGE_DL)
-    print("MESSAGE:", MESSAGE)
-    print("PLAYER CHIPS:", PLAYER['chips'])
     
     # Return HTML content as a response
     return jsonify({
@@ -139,8 +127,6 @@ def new_card():
         SUM_PL_CARDS += player_card
         CARD_DECK_Pl.append(player_card)
         return render_game()
-    
-    print("new card:", player_card)
     
     return jsonify({
         'SUM_DL_CARDS': SUM_DL_CARDS,
@@ -174,8 +160,6 @@ def game_action(action):
     Returns:
         str: HTML page with the updated game state.
     '''
-    global SUM_PL_CARDS, SUM_DL_CARDS, HAS_BLACKJACK, IS_IN_GAME, MESSAGE_DL, MESSAGE, CARD_DECK_Pl, CARD_DECK_Dl, PLAYER
-    
     if action == 'startTheGame':
         start_game()
         return render_game()
