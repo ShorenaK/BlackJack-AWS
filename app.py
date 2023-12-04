@@ -58,85 +58,84 @@ def start_game(self):
     
     # Return a JSON response with game state
     return jsonify({
-        'CARD_DECK_Pl': CARD_DECK_Pl,
-        'CARD_DECK_Dl': CARD_DECK_Dl,
-        'SUM_DL_CARDS': SUM_DL_CARDS,
-        'SUM_PL_CARDS': SUM_PL_CARDS,
-        'MESSAGE_DL': MESSAGE_DL,  
-        'MESSAGE': MESSAGE,
-        'PLAYER_NAME': PLAYER['name'],
-        'PLAYER_CHIPS': PLAYER['chips'],
+        'CARD_DECK_Pl': self.CARD_DECK_Pl,
+        'CARD_DECK_Dl': self.CARD_DECK_Dl,
+        'SUM_DL_CARDS': self.SUM_DL_CARDS,
+        'SUM_PL_CARDS': self.SUM_PL_CARDS,
+        'MESSAGE_DL': self.MESSAGE_DL,  
+        'MESSAGE': self.MESSAGE,
+        'PLAYER_NAME': self.PLAYER['name'],
+        'PLAYER_CHIPS': self.PLAYER['chips'],
     })
 
 
-def render_game():
+def render_game(self):
     '''
     Renders the game state, updates messages, and displays cards.
     '''
-    global MESSAGE, MESSAGE_DL, SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, CARD_DECK_Dl, PLAYER, HAS_BLACKJACK, IS_IN_GAME
 
-    total_dl_tag = f'Total: {SUM_DL_CARDS}'
-    total_pl_tag = f'Total: {SUM_PL_CARDS}'
+
+    total_dl_tag = f'Total: {self.SUM_DL_CARDS}'
+    total_pl_tag = f'Total: {self.SUM_PL_CARDS}'
     
     # Update messages based on game logic
-    if SUM_DL_CARDS == 21:
-        MESSAGE_DL, MESSAGE = "Table Wins Black Jack!", "Player lost!"
-        PLAYER['chips'] -= CHIPS
-        IS_IN_GAME = False
+    if self.SUM_DL_CARDS == 21:
+       self.MESSAGE_DL, MESSAGE = "Table Wins Black Jack!", "Player lost!"
+       self.PLAYER['chips'] -= self.CHIPS
+       self.IS_IN_GAME = False
         
-    elif SUM_PL_CARDS == 21:
-        MESSAGE = "Player wins Black Jack!!!"
-        PLAYER['chips'] += CHIPS
-        HAS_BLACKJACK = True
+    elif self.SUM_PL_CARDS == 21:
+        self.MESSAGE = "Player wins Black Jack!!!"
+        self.PLAYER['chips'] += self.CHIPS
+        self.HAS_BLACKJACK = True
         
-    elif SUM_PL_CARDS == SUM_DL_CARDS:
-        MESSAGE = "It's TIE"
+    elif self.SUM_PL_CARDS == self.SUM_DL_CARDS:
+         self.MESSAGE = "It's TIE"
         
-    elif SUM_PL_CARDS <= 20:
-        IS_IN_GAME = True
-        MESSAGE = "Would you like to hit?"
+    elif self.SUM_PL_CARDS <= 20:
+         self.IS_IN_GAME = True
+         self.MESSAGE = "Would you like to hit?"
         
-    elif SUM_PL_CARDS > 21:
-        MESSAGE = "Bust! You lost a Bet!"
-        PLAYER['chips'] -= CHIPS
-        IS_IN_GAME = False
+    elif self.SUM_PL_CARDS > 21:
+         self.MESSAGE = "Bust! You lost a Bet!"
+         self.PLAYER['chips'] -= self.CHIPS
+         self.IS_IN_GAME = False
     
     # Return HTML content as a response
     return jsonify({
-        'CARD_DECK_Pl': CARD_DECK_Pl,
-        'CARD_DECK_Dl': CARD_DECK_Dl,
-        'SUM_DL_CARDS': SUM_DL_CARDS,
-        'SUM_PL_CARDS': SUM_PL_CARDS, 
-        'MESSAGE_DL': MESSAGE_DL,
-        'MESSAGE': MESSAGE,
-        'PLAYER_NAME': PLAYER['name'],
-        'PLAYER_CHIPS': PLAYER['chips'],
-        'HTML_CONTENT': render_template('index.html', message=MESSAGE, messageDl=MESSAGE_DL,totalPl=total_pl_tag, totalDl=total_dl_tag),
+        'CARD_DECK_Pl': self.CARD_DECK_Pl,
+        'CARD_DECK_Dl': self.CARD_DECK_Dl,
+        'SUM_DL_CARDS': self.SUM_DL_CARDS,
+        'SUM_PL_CARDS': self.SUM_PL_CARDS, 
+        'MESSAGE_DL': self.MESSAGE_DL,
+        'MESSAGE': self.MESSAGE,
+        'PLAYER_NAME': self.PLAYER['name'],
+        'PLAYER_CHIPS': self.PLAYER['chips'],
+        'HTML_CONTENT': render_template('index.html', message = self.MESSAGE, messageDl = self.MESSAGE_DL, totalPl = total_pl_tag, totalDl = total_dl_tag),
     })
     
 
-def new_card():
+def new_card(self):
     '''
     Draws a new card for the player and updates the game state.
     '''
-    global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, MESSAGE, MESSAGE_DL, PLAYER, IS_IN_GAME, HAS_BLACKJACK
     
     # Default value of new card
     player_card = None
     
-    if IS_IN_GAME and not HAS_BLACKJACK:
-        player_card = shuffle_new_card()
-        SUM_PL_CARDS += player_card
-        CARD_DECK_Pl.append(player_card)
-        return render_game()
+    if self.IS_IN_GAME and not self.HAS_BLACKJACK:
+        player_card = self.shuffle_new_card()
+        self.SUM_PL_CARDS += player_card
+        self.CARD_DECK_Pl.append(player_card)
+        return self.render_game()
     
     return jsonify({
-        'SUM_DL_CARDS': SUM_DL_CARDS,
-        'SUM_PL_CARDS': SUM_PL_CARDS,
-        'MESSAGE_DL': MESSAGE_DL,
-        'MESSAGE': MESSAGE,
-        'PLAYER_CHPS': PLAYER['chips'], 
-        'CARD_DECK_Pl': CARD_DECK_Pl,
+        'SUM_DL_CARDS': self.SUM_DL_CARDS,
+        'SUM_PL_CARDS': self.SUM_PL_CARDS,
+        'MESSAGE_DL': self.MESSAGE_DL,
+        'MESSAGE': self.MESSAGE,
+        'PLAYER_CHPS': self.PLAYER['chips'], 
+        'CARD_DECK_Pl': self.CARD_DECK_Pl,
          
     })
 
