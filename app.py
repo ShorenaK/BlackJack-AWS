@@ -43,9 +43,7 @@ def start_game():
     card_one_player = shuffle_new_card()
     card_two_player = shuffle_new_card()
     CARD_DECK_Pl = [card_one_player, card_two_player]
-    # CARD_DECK_Pl = f"{card_one_player} {card_two_player}"
     SUM_PL_CARDS = card_one_player + card_two_player
-
     card_one_dl = shuffle_new_card()
     card_two_dl = shuffle_new_card()
     CARD_DECK_Dl = [card_one_dl, card_two_dl]
