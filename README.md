@@ -1,4 +1,4 @@
-# Shrena K. Anzhilov  CS5001_Final_Project - "BlackJack Game "
+## Shorena K. Anzhilov  CS5001_Final_Project - "BlackJack Game"
 
 # Game Descriptiion:
 
