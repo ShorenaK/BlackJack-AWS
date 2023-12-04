@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, jsonify, render_template, request
+from flask import Flask, render_template, jsonify, render_template
 from random import randint
 
 app = Flask(__name__)
@@ -74,8 +74,7 @@ def render_game():
     
     # Update messages based on game logic
     if SUM_DL_CARDS == 21:
-        MESSAGE_DL = "Table Wins Black Jack!!!"
-        MESSAGE = "Player lost!"
+        MESSAGE_DL, MESSAGE = "Table Wins Black Jack!", "Player lost!"
         PLAYER['chips'] -= CHIPS
         IS_IN_GAME = False
         
@@ -168,4 +167,3 @@ def game_action(action):
 
 if __name__ == "__main__":
     app.run(port=8008, debug=True, use_reloader=True)
-
