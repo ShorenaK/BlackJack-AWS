@@ -3,20 +3,21 @@ from random import randint
 
 app = Flask(__name__)
 
-# Initialize global variables
-CHIPS = 50
-SUM_PL_CARDS= 0
-SUM_DL_CARDS = 0 
-HAS_BLACKJACK = False
-IS_IN_GAME = False
-MESSAGE_DL = ''
-MESSAGE = ''
-CARD_DECK_Pl = []
-CARD_DECK_Dl = []
-PLAYER = {
-    'name': 'Player',
-    'chips': 1000
-}
+class BlackjackGame:
+    def __init__(self):
+        self.CHIPS = 50
+        self.SUM_PL_CARDS= 0
+        self.SUM_DL_CARDS = 0 
+        self.HAS_BLACKJACK = False
+        self.IS_IN_GAME = False
+        self.MESSAGE_DL = ''
+        self.MESSAGE = ''
+        self.CARD_DECK_Pl = []
+        self.CARD_DECK_Dl = []
+        self.PLAYER = {
+            'name': 'Player',
+            'chips': 1000
+        }
 
 def shuffle_new_card():
     '''
@@ -40,10 +41,14 @@ def start_game():
     '''
     global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, CARD_DECK_Dl, IS_IN_GAME
     IS_IN_GAME = True
+    
+    # Initialize player's cards.
     card_one_player = shuffle_new_card()
     card_two_player = shuffle_new_card()
     CARD_DECK_Pl = [card_one_player, card_two_player]
     SUM_PL_CARDS = sum(CARD_DECK_Pl)
+    
+    # Initialize dealer's card.
     card_one_dl = shuffle_new_card()
     card_two_dl = shuffle_new_card()
     CARD_DECK_Dl = [card_one_dl, card_two_dl]
