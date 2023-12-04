@@ -139,6 +139,8 @@ def new_card(self):
          
     })
 
+# Create an instance of the BlackJackGame class.
+blackjack_game = BlackjackGame()
 # Flask route for rendering the game page
 @app.route('/')
 def index():
@@ -162,12 +164,10 @@ def game_action(action):
         str: HTML page with the updated game state.
     '''
     if action == 'startTheGame':
-        start_game()
-        return render_game()
+        return blackjack_game.render_game()
     
     elif action == 'newCard':
-        new_card()
-        return render_game()
+        return blackjack_game.render_game()
         
 
 if __name__ == "__main__":
