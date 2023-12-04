@@ -43,12 +43,12 @@ def start_game():
     card_one_player = shuffle_new_card()
     card_two_player = shuffle_new_card()
     CARD_DECK_Pl = [card_one_player, card_two_player]
-    SUM_PL_CARDS = card_one_player + card_two_player
+    SUM_PL_CARDS = sum(CARD_DECK_Pl)
     card_one_dl = shuffle_new_card()
     card_two_dl = shuffle_new_card()
     CARD_DECK_Dl = [card_one_dl, card_two_dl]
+    SUM_DL_CARDS = sum(CARD_DECK_Dl)
     CARD_DECK_Dl = f"{card_one_dl}  {card_two_dl}"
-    SUM_DL_CARDS = card_one_dl + card_two_dl 
     
     # Return a JSON response with game state
     return jsonify({
@@ -56,13 +56,12 @@ def start_game():
         'CARD_DECK_Dl': CARD_DECK_Dl,
         'SUM_DL_CARDS': SUM_DL_CARDS,
         'SUM_PL_CARDS': SUM_PL_CARDS,
-        
         'MESSAGE_DL': MESSAGE_DL,  
         'MESSAGE': MESSAGE,
-        
         'PLAYER_NAME': PLAYER['name'],
         'PLAYER_CHIPS': PLAYER['chips'],
     })
+
 
 def render_game():
     '''
