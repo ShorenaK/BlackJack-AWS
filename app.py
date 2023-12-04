@@ -1,12 +1,14 @@
-from flask import Flask, render_template, jsonify, render_template
+from flask import Flask, render_template, jsonify, render_template, current_app
 from random import randint
 
 app = Flask(__name__)
+blackjack_game = None
 
 class BlackjackGame:
     ''' Class represeting a Blackjack game. '''
     def __init__(self):
         ''' Initiliaze the BalckjackGame Instance. '''
+        self.app = current_app
         self.CHIPS = 50
         self.SUM_PL_CARDS= 0
         self.SUM_DL_CARDS = 0 
@@ -81,42 +83,42 @@ class BlackjackGame:
         jsonify: JSON resonse with updated game state.
         
         '''
-
-        total_dl_tag = f'Total: {self.SUM_DL_CARDS}'
-        total_pl_tag = f'Total: {self.SUM_PL_CARDS}'
-        
-        # Update messages based on game logic.
-        if self.SUM_DL_CARDS == 21:
-           self.MESSAGE_DL = "Table Wins Black Jack!"
-           self.MESSAGE = "Player lost!"
-           self.PLAYER['chips'] -= self.CHIPS
-           self.IS_IN_GAME = False   
-        elif self.SUM_PL_CARDS == 21:
-             self.MESSAGE = "Player wins Black Jack!"
-             self.PLAYER['chips'] += self.CHIPS
-             self.HAS_BLACKJACK = True  
-        elif self.SUM_PL_CARDS == self.SUM_DL_CARDS:
-             self.MESSAGE = "It's TIE"  
-        elif self.SUM_PL_CARDS <= 20:
-             self.IS_IN_GAME = True
-             self.MESSAGE = "Would you like to hit?"   
-        elif self.SUM_PL_CARDS > 21:
-             self.MESSAGE = "Bust! You lost a Bet!"
-             self.PLAYER['chips'] -= self.CHIPS
-             self.IS_IN_GAME = False
-        
-        # Return HTML content as a response.
-        return jsonify({
-            'CARD_DECK_Pl': self.CARD_DECK_Pl,
-            'CARD_DECK_Dl': self.CARD_DECK_Dl,
-            'SUM_DL_CARDS': self.SUM_DL_CARDS,
-            'SUM_PL_CARDS': self.SUM_PL_CARDS, 
-            'MESSAGE_DL': self.MESSAGE_DL,
-            'MESSAGE': self.MESSAGE,
-            'PLAYER_NAME': self.PLAYER['name'],
-            'PLAYER_CHIPS': self.PLAYER['chips'],
-            'HTML_CONTENT': render_template('index.html', message = self.MESSAGE, messageDl = self.MESSAGE_DL, totalPl = total_pl_tag, totalDl = total_dl_tag),
-        })
+        with self.app.app_context():
+            total_dl_tag = f'Total: {self.SUM_DL_CARDS}'
+            total_pl_tag = f'Total: {self.SUM_PL_CARDS}'
+            
+            # Update messages based on game logic.
+            if self.SUM_DL_CARDS == 21:
+                self.MESSAGE_DL = "Table Wins Black Jack!"
+                self.MESSAGE = "Player lost!"
+                self.PLAYER['chips'] -= self.CHIPS
+                self.IS_IN_GAME = False   
+            elif self.SUM_PL_CARDS == 21:
+                self.MESSAGE = "Player wins Black Jack!"
+                self.PLAYER['chips'] += self.CHIPS
+                self.HAS_BLACKJACK = True  
+            elif self.SUM_PL_CARDS == self.SUM_DL_CARDS:
+                self.MESSAGE = "It's TIE"  
+            elif self.SUM_PL_CARDS <= 20:
+                self.IS_IN_GAME = True
+                self.MESSAGE = "Would you like to hit?"   
+            elif self.SUM_PL_CARDS > 21:
+                self.MESSAGE = "Bust! You lost a Bet!"
+                self.PLAYER['chips'] -= self.CHIPS
+                self.IS_IN_GAME = False
+            
+            # Return HTML content as a response.
+            return jsonify({
+                'CARD_DECK_Pl': self.CARD_DECK_Pl,
+                'CARD_DECK_Dl': self.CARD_DECK_Dl,
+                'SUM_DL_CARDS': self.SUM_DL_CARDS,
+                'SUM_PL_CARDS': self.SUM_PL_CARDS, 
+                'MESSAGE_DL': self.MESSAGE_DL,
+                'MESSAGE': self.MESSAGE,
+                'PLAYER_NAME': self.PLAYER['name'],
+                'PLAYER_CHIPS': self.PLAYER['chips'],
+                'HTML_CONTENT': render_template('index.html', message = self.MESSAGE, messageDl = self.MESSAGE_DL, totalPl = total_pl_tag, totalDl = total_dl_tag),
+            })
         
     def new_card(self):
         '''
@@ -126,25 +128,25 @@ class BlackjackGame:
         jsonify: JSON response with updated game state.
         
         '''
-        
+        with self.app.app_context():
         # Default value of new card.
-        player_card = None
-        
-        if self.IS_IN_GAME and not self.HAS_BLACKJACK:
-            player_card = self.shuffle_new_card()
-            self.SUM_PL_CARDS += player_card
-            self.CARD_DECK_Pl.append(player_card)
-            return self.render_game()
-        
-        return jsonify({
-            'SUM_DL_CARDS': self.SUM_DL_CARDS,
-            'SUM_PL_CARDS': self.SUM_PL_CARDS,
-            'MESSAGE_DL': self.MESSAGE_DL,
-            'MESSAGE': self.MESSAGE,
-            'PLAYER_CHPS': self.PLAYER['chips'], 
-            'CARD_DECK_Pl': self.CARD_DECK_Pl,
+            player_card = None
             
-        })
+            if self.IS_IN_GAME and not self.HAS_BLACKJACK:
+                player_card = self.shuffle_new_card()
+                self.SUM_PL_CARDS += player_card
+                self.CARD_DECK_Pl.append(player_card)
+                return self.render_game()
+            
+            return jsonify({
+                'SUM_DL_CARDS': self.SUM_DL_CARDS,
+                'SUM_PL_CARDS': self.SUM_PL_CARDS,
+                'MESSAGE_DL': self.MESSAGE_DL,
+                'MESSAGE': self.MESSAGE,
+                'PLAYER_CHPS': self.PLAYER['chips'], 
+                'CARD_DECK_Pl': self.CARD_DECK_Pl,
+                
+            })
 
 # Flask route for rendering the game page.
 @app.route('/')
