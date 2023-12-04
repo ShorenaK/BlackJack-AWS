@@ -6,7 +6,7 @@ app = Flask(__name__)
 class BlackjackGame:
     ''' Class represeting a Blackjack game. '''
     def __init__(self):
-        ''' Initialize the BalckjackGame Instance. '''
+        ''' Initiliaze the BalckjackGame Instance. '''
         self.CHIPS = 50
         self.SUM_PL_CARDS= 0
         self.SUM_DL_CARDS = 0 

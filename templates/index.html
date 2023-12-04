@@ -2,18 +2,22 @@
 
 <html>
     <head>
+        <!-- Metadata for character set and compatibility -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Title and additional metadata -->
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Link to ecternal stylesheet -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-      
     </head>
     <body>
-    
+    <!-- Headind with a link to the main casino page "Game Table" -->
     <h1><a style="color: gold;" href="{{ url_for('indexmain') }}"><b>Enter Casino</b></a></h1>
+    <!-- Container for the main image -->
     <div class="main_image_container">   
+    <!-- Mian image with a link to the main casino page -->
     <img class='main_image'  src="{{ url_for('static', filename='images/image0.jpeg') }}" alt="casino background">
     </div>
     </body>
