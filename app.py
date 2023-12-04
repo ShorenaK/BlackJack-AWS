@@ -19,7 +19,7 @@ class BlackjackGame:
             'chips': 1000
         }
 
-def shuffle_new_card():
+def shuffle_new_card(self):
     '''
     Shuffle and return a new card value.
     
@@ -35,25 +35,26 @@ def shuffle_new_card():
         return random_num
     
 
-def start_game():
+def start_game(self):
     '''
     Starts the game by initializing player's and dealer's cards.
     '''
-    global SUM_PL_CARDS, SUM_DL_CARDS, CARD_DECK_Pl, CARD_DECK_Dl, IS_IN_GAME
-    IS_IN_GAME = True
+    
+    self.IS_IN_GAME = True
     
     # Initialize player's cards.
-    card_one_player = shuffle_new_card()
-    card_two_player = shuffle_new_card()
-    CARD_DECK_Pl = [card_one_player, card_two_player]
-    SUM_PL_CARDS = sum(CARD_DECK_Pl)
+    self.card_one_player = self.shuffle_new_card()
+    card_one_player = self.shuttle_new_card()
+    card_two_player = self.shuffle_new_card()
+    self.CARD_DECK_Pl = [card_one_player, card_two_player]
+    self.SUM_PL_CARDS = sum(self.CARD_DECK_Pl)
     
     # Initialize dealer's card.
-    card_one_dl = shuffle_new_card()
-    card_two_dl = shuffle_new_card()
-    CARD_DECK_Dl = [card_one_dl, card_two_dl]
-    SUM_DL_CARDS = sum(CARD_DECK_Dl)
-    CARD_DECK_Dl = f"{card_one_dl}  {card_two_dl}"
+    card_one_dl = self.shuffle_new_card()
+    card_two_dl = self.shuffle_new_card()
+    self.CARD_DECK_Dl = [card_one_dl, card_two_dl]
+    self.SUM_DL_CARDS = sum(self.CARD_DECK_Dl)
+    self.CARD_DECK_Dl = f"{card_one_dl}  {card_two_dl}"
     
     # Return a JSON response with game state
     return jsonify({
