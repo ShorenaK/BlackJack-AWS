@@ -17,15 +17,13 @@ A third button " End Game" is incorporated for navigation to the main page, serv
 ## Go to app:
 [CLICK HERE!]()
 
-## Technologies Implemented:
-
-## Tech Stack:
+## Technologies Implemented - Tech Stack:
 
 - Server-side: Python3, Flask
 - Frontend: HTML, JavaScript (with Ajax for asynchronous requests)
 - CSS
 
-## Description:
+Description:
 
 Server-side: The backend of the application is powered by Python3 with the Flask lightwaight web framework, handling the game logic and serving responses to client requests.
 
