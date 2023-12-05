@@ -87,23 +87,23 @@ class BlackjackGame:
             total_pl_tag = f'Total: {self.SUM_PL_CARDS}'
             # Update messages based on game logic.
             if self.SUM_DL_CARDS == 21:
-                self.MESSAGE_DL = "Table Wins Black Jack!"
-                self.MESSAGE = "Player lost!"
-                self.PLAYER['chips'] -= self.CHIPS
-                self.IS_IN_GAME = False   
+               self.MESSAGE_DL = "Table Wins Black Jack!"
+               self.MESSAGE = "Player lost!"
+               self.PLAYER['chips'] -= self.CHIPS
+               self.IS_IN_GAME = False   
             elif self.SUM_PL_CARDS == 21:
-                self.MESSAGE = "Player wins Black Jack!"
-                self.PLAYER['chips'] += self.CHIPS
-                self.HAS_BLACKJACK = True  
+                 self.MESSAGE = "Player wins Black Jack!"
+                 self.PLAYER['chips'] += self.CHIPS
+                 self.HAS_BLACKJACK = True  
             elif self.SUM_PL_CARDS == self.SUM_DL_CARDS:
-                self.MESSAGE = "It's TIE"  
+                 self.MESSAGE = "It's TIE!"  
             elif self.SUM_PL_CARDS <= 20:
-                self.IS_IN_GAME = True
-                self.MESSAGE = "Would you like to hit?"   
+                 self.IS_IN_GAME = True
+                 self.MESSAGE = "Would you like to hit?"   
             elif self.SUM_PL_CARDS > 21:
-                self.MESSAGE = "Bust! You lost a Bet!"
-                self.PLAYER['chips'] -= self.CHIPS
-                self.IS_IN_GAME = False
+                 self.MESSAGE = "Player lost a Bet!"
+                 self.PLAYER['chips'] -= self.CHIPS
+                 self.IS_IN_GAME = False
             # Return HTML content as a response.
             return jsonify({
                 'CARD_DECK_Pl': self.CARD_DECK_Pl,
@@ -116,7 +116,8 @@ class BlackjackGame:
                 'PLAYER_CHIPS': self.PLAYER['chips'],
                 'HTML_CONTENT': render_template('index.html', message = self.MESSAGE, messageDl = self.MESSAGE_DL, totalPl = total_pl_tag, totalDl = total_dl_tag),
             })
-        
+
+
     def new_card(self):
         '''
         Draws a new card for the player and updates the game state.
@@ -130,20 +131,20 @@ class BlackjackGame:
             player_card = None
             
             if self.IS_IN_GAME and not self.HAS_BLACKJACK:
-                player_card = self.shuffle_new_card()
-                self.SUM_PL_CARDS += player_card
-                self.CARD_DECK_Pl.append(player_card)
-                return self.render_game()
+               player_card = self.shuffle_new_card()
+               self.SUM_PL_CARDS += player_card
+               self.CARD_DECK_Pl.append(player_card)
+               return self.render_game()
             
             return jsonify({
                 'SUM_DL_CARDS': self.SUM_DL_CARDS,
                 'SUM_PL_CARDS': self.SUM_PL_CARDS,
                 'MESSAGE_DL': self.MESSAGE_DL,
                 'MESSAGE': self.MESSAGE,
-                'PLAYER_CHPS': self.PLAYER['chips'], 
-                'CARD_DECK_Pl': self.CARD_DECK_Pl,
-                
-            })
+                'PLAYER_NAME': self.PLAYER['name'],
+                'PLAYER_CHIPS': self.PLAYER['chips'], 
+                'CARD_DECK_Pl': self.CARD_DECK_Pl,    
+             })
 
 # Flask route for rendering the game page.
 @app.route('/')

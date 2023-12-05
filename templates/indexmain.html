@@ -17,24 +17,36 @@
     <div class="container">
         <!-- Dispay dealer's cards and total -->
         <div id="dealer_div"> 
-        <p id="dealer_cards">Dealer's Cards: {{ cardsDl }}</p>
-        <p id="dealer_total" style="color: rgb(25, 22, 27);"> Total: {{ totalDl }}</p>
-        <p id="message-dealer"> {{ messageDl }} </p>
+        <p id="dealer_cards" style="color: blanchedalmond;">Dealer's Cards: {{ cardsDl }}</p>
+        <p id="dealer_total" style="color: rgba(42, 180, 15, 0.979);"> Total: {{ totalDl }}</p>
+        <p id="message-dealer" style="color: white;"> {{ messageDl }} </p>
         </div>
         <!-- Display messages and total for the player -->
-        <p id="message"> {{ message }} </p>
-        <p id="player_cards">Player's Cards: {{ cardsPl }}</p>
-        <p id="player_total" style="color: rgb(26, 24, 27);">Total: {{ totalPl }}</p> 
-        <p id="player_name_chips"> </p>
+        <p id="message"  style="color: white"> {{ message }} </p>
+        <p id="player_cards" style="color: blanchedalmond">Player's Cards: {{ cardsPl }}</p>
+        <p id="player_total"  style="color: rgba(42, 180, 15, 0.979);">Total: {{ totalPl }}</p> 
+        <p id="player_name_chips" style="color: blanchedalmond"> </p>
         <!-- Buttons for game actions -->
-        <button id="start_game">START GAME</button>
+        <button id="start_game">START</button>
         <button id="new_card">NEW CARD</button>
-        <button><a style="text-decoration:none" style="color: rgb(2, 40, 14);" href="{{ url_for('index') }}">END GAME</a></button>
+        <button id="end_butt"><a style="text-decoration:none" href="{{ url_for('index') }}">END</a></button>
     </div>
     <!-- JavaScript section for making asynchronous request and updating UI -->
     <script>
+    // Function to disable buttons during an asynchronous call
+    function disableButtons() {
+        $("#start_game").prop("disabled", true);
+        $("#new_card").prop("disabled", true);
+    }
+    // Function to enable buttons after an asynchronous call is complete
+    function enableButtons() {
+        $("#start_game").prop("disabled", false);
+        $("#new_card").prop("disabled", false);
+    }
     // jQuery for making asynchronous HTTP requests to start the game.
         function startGame() {
+            // Disable buttons during the asynchronous call
+            disableButtons();
             // AJAX request to start the game.
             $.ajax({
                 url: "/game_action/startTheGame",
@@ -47,11 +59,17 @@
                 },
                 error: function (error) {
                     console.log(error);
-                }
-            });
-        }
+                },
+                complete: function () {
+                // Enable buttons after the asynchronous call is complete
+                enableButtons()
+             }
+        });
+      }
     // jQuery for making asynchronous HTTP requests for new card.
         function drawNewCard() {
+            // Disable buttons during the asynchronous call
+            disableButtons();
             $.ajax({
                 url: "/game_action/newCard", 
                 type: "GET",
@@ -63,9 +81,13 @@
                 },
                 error: function (error) {
                     console.log(error);
-                }
-            });
-        }
+                },
+                complete: function () {
+                // Enable buttons after the asynchronous call is complete
+                enableButtons()
+             }
+         });
+      }
 // Function to update the user interface based on the received data.
         function updateUI(data) {
             // Update varios elements with data from the server.
@@ -78,6 +100,9 @@
             $("#message-dealer").text(data.MESSAGE_DL)
             $("#message").text(data.MESSAGE) 
             $("#player_name_chips").text(data.PLAYER_NAME + " has " + data.PLAYER_CHIPS + " chips");
+
+            // Enabel buttons after updateing the UI
+            enableButtons() 
         }
         // Click events for startGame and drawNewCard buttons.
         $(document).ready(function () {

@@ -11,7 +11,9 @@ In case of a tie, where both the player and the dealer have the same card value,
 
 A third button " End Game" is incorporated for navigation to the main page, serving as the entrance to the casino and the starting point to enter Black Jack Table.
 
-## Preview [pictures]
+## Preview 
+![alt text](/static/images/new_back.png)
+![alt text](/static/images/image1.png)
 
 
 ## Go to app:
@@ -36,7 +38,9 @@ Frontend: The user interface is built using HTML for structure, JavaScript for d
 - 3. [Python Documentation](https://docs.python.org/3/): Official documentation for the Python programming language.
 - 4. [Blackjack Rules](https://bicyclecards.com/how-to-play/blackjack/): A resource explaining the basic rules of Blackjack for reference.
 - 5. [CSS Tricks](https://css-tricks.com/): Helpful tips and tricks for working with CSS.
+
 - 6. [Flask Tutorial](https://flask.palletsprojects.com/en/2.0.x/tutorial/): Step-by-step guide for getting started with Flask. A great resource if you're new to Flask development.
+- Stak OverFlow
 
 ## Missing Features:
 - Multiplayer Support

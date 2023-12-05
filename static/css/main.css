@@ -4,22 +4,40 @@ body {
    font-family: Georgia, 'Times New Roman', Times, serif;
    font-weight: bold;
 }
+
 /* Styling for the main image container */
 .main_image_container {
    text-align: center;
 }
- /* Styling for the main iamge */ 
- .main_image {
+
+/* Styling for the main image */
+.main_image {
    margin: auto;
-   max-width: 100%; 
+   max-width: 100%;
 }
-a {
+
+a{
    text-decoration: none;
 }
+
 h1 {
    color: gold;
    display: flex;
    justify-content: center;
    font-size: 50px;
-   font-weight:900;
-} 
+   font-weight: 900;
+}
+
+/* Media query for smaller screens (less than 768px) */
+@media screen and (max-width: 768px) {
+   h1 {
+       font-size: 30px;
+   }
+}
+
+/* Media query for larger screens (769px and above) */
+@media screen and (min-width: 769px) {
+   h1 {
+       font-size: 50px; 
+   }
+}
