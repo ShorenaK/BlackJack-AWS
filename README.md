@@ -13,8 +13,10 @@ A third button " End Game" is incorporated for navigation to the main page, serv
 
 ## Preview [pictures]
 
+
 ## Go to app:
 [CLICK HERE!]()
+
 
 ## Technologies Implemented - Tech Stack:
 
@@ -29,7 +31,12 @@ Server-side: The backend of the application is powered by Python3 with the Flask
 Frontend: The user interface is built using HTML for structure, JavaScript for dynamic interactions (including Ajax for asynchronous communication with the Flask server), and CSS for styling.
 
 ## Resources:
-
+- 1. [Flask Documentation](https://flask.palletsprojects.com/en/2.0.x/): Official documentation for Flask, the web framework used in this project.
+- 2. [JQuery Documentation](https://api.jquery.com/): Documentation for JQuery, a JavaScript library used for making asynchronous requests in this project.
+- 3. [Python Documentation](https://docs.python.org/3/): Official documentation for the Python programming language.
+- 4. [Blackjack Rules](https://bicyclecards.com/how-to-play/blackjack/): A resource explaining the basic rules of Blackjack for reference.
+- 5. [CSS Tricks](https://css-tricks.com/): Helpful tips and tricks for working with CSS.
+- 6. [Flask Tutorial](https://flask.palletsprojects.com/en/2.0.x/tutorial/): Step-by-step guide for getting started with Flask. A great resource if you're new to Flask development.
 
 ## Missing Features:
 - Multiplayer Support
@@ -39,7 +46,7 @@ Frontend: The user interface is built using HTML for structure, JavaScript for d
 - Betting Options
 - Game Statistics
 
-## Next Steps- Future implementions:
+## Next Steps - Features Implementations:
 1. Multiplayer Functionality:
 Enhance the gaming experience by introducing multiplayer functionality, allowing multiple players to compete against the dealer.
 
@@ -62,7 +69,6 @@ Enhance the user interface to provide a visually appealing and intuitive gaming 
 Further align the game with traditional blackjack rules, ensuring a more authentic representation of the classic card game.
 
 ## Challenges:
-
 
 ## Highlights:  
 

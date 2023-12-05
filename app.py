@@ -46,9 +46,8 @@ class BlackjackGame:
         jsonify: JSON response with game sate.
         
         '''
-        
         self.IS_IN_GAME = True
-        
+
         # Initialize player's cards.
         card_one_player = self.shuffle_new_card()
         card_two_player = self.shuffle_new_card()
@@ -86,7 +85,6 @@ class BlackjackGame:
         with self.app.app_context():
             total_dl_tag = f'Total: {self.SUM_DL_CARDS}'
             total_pl_tag = f'Total: {self.SUM_PL_CARDS}'
-            
             # Update messages based on game logic.
             if self.SUM_DL_CARDS == 21:
                 self.MESSAGE_DL = "Table Wins Black Jack!"
@@ -106,7 +104,6 @@ class BlackjackGame:
                 self.MESSAGE = "Bust! You lost a Bet!"
                 self.PLAYER['chips'] -= self.CHIPS
                 self.IS_IN_GAME = False
-            
             # Return HTML content as a response.
             return jsonify({
                 'CARD_DECK_Pl': self.CARD_DECK_Pl,
