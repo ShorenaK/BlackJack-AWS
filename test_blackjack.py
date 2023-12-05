@@ -1,16 +1,16 @@
 import unittest
-from app import BlackjackGame
+from app_blackjack import BlackjackGame
 
 
 class TestBlackjackGame(unittest.TestCase):
     def setUp(self):
         '''Set up a new instance of the BlackjackGame'''
-        self.blackjack_game = BlackjackGame()
+        self.blackjack_game = BlackjackGame(app_blackjack=None)
         
     def test_shuffle_new_card(self):
         '''Test the shuffle_new_card function.'''
         card = self.blackjack_game.shuffle_new_card()
-        self.assertTrue(1 <= card <= 11, " A card value should be between 1 and 11." )
+        self.assertTrue(1 <= card <= 11, "A card value should be between 1 and 11.")
 
 
     def test_start_game(self):
@@ -19,10 +19,11 @@ class TestBlackjackGame(unittest.TestCase):
         game_state = self.blackjack_game.start_game()
         
         #  Assertions based on the expected initilial game state.
-        self.assertTrue(game_state['IS_IN_GAME'], "Game should ne in progress.")
-        self.assertEqual(game_state['MESSGE'], "", "Initial message should be empty.")
+        self.assertTrue(game_state['IS_IN_GAME'], "Game should be in progress.")
+        self.assertEqual(game_state['MESSAGE'], "", "Initial message should be empty.")
         self.assertEqual(game_state['SUM_DL_CARDS'], 0, "Dealer's total shoudl be 0.")
         self.assertEqual(game_state['SUM_PL_CARDS'], 0, "Plyer's total shoudl be 0." )
+        
 
 
     def test_render_game(self):
@@ -59,7 +60,7 @@ class TestBlackjackGame(unittest.TestCase):
         self.assertEqual(game_state['MESSAGE'],"", "Player's message should be empty." )
         self.assertTrue(game_state['IS_IN_GAME'], "Game should still be in progress." )
         
-if __name__ == '__main':
+if __name__ == '__main__':
     unittest.main()
     
     
