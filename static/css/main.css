@@ -1,8 +1,7 @@
 /* Styling for the body of the page */
 body {
-   background: crimson url("{{ url_for('static', filename='images/image1.jpeg') }}") no-repeat fixed center;
+   background: rgb(116, 5, 27) fixed center;
    font-family: Georgia, 'Times New Roman', Times, serif;
-   color: crimson;
    font-weight: bold;
 }
 /* Styling for the main image container */
