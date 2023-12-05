@@ -16,18 +16,20 @@
     <!-- Heading for the Balckjack table -->
     <div class="container">
         <!-- Dispay dealer's cards and total -->
+        <div id="dealer_div"> 
         <p id="dealer_cards">Dealer's Cards: {{ cardsDl }}</p>
-        <p id="dealer_total" style="color: blueviolet;"> Total: {{ totalDl }}</p>
-        <h4 id="message-dealer"> {{ messageDl }} </h4>
+        <p id="dealer_total" style="color: rgb(25, 22, 27);"> Total: {{ totalDl }}</p>
+        <p id="message-dealer"> {{ messageDl }} </p>
+        </div>
         <!-- Display messages and total for the player -->
-        <h4 id="message"> {{ message }} </h4>
+        <p id="message"> {{ message }} </p>
         <p id="player_cards">Player's Cards: {{ cardsPl }}</p>
-        <p id="player_total" style="color: blueviolet;">Total: {{ totalPl }}</p> 
-        <h5 id="player_name_chips"> </h5>
+        <p id="player_total" style="color: rgb(26, 24, 27);">Total: {{ totalPl }}</p> 
+        <p id="player_name_chips"> </p>
         <!-- Buttons for game actions -->
         <button id="start_game">START GAME</button>
         <button id="new_card">NEW CARD</button>
-        <button><a style="text-decoration:none" style="color: rgb(5, 85, 30);" href="{{ url_for('index') }}">END GAME</a></button>
+        <button><a style="text-decoration:none" style="color: rgb(2, 40, 14);" href="{{ url_for('index') }}">END GAME</a></button>
     </div>
     <!-- JavaScript section for making asynchronous request and updating UI -->
     <script>

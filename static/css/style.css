@@ -1,38 +1,38 @@
-/*  Global styling for the entire page */
-body{
+/* Global styling for the entire page */
+body {
     font-family: Arial, Helvetica, sans-serif;
     background-image: url("/static/images/image1.png");
+    background-repeat: no-repeat;
     background-size: cover;
-    background-size: 100%;
     margin-bottom: 50px;
     text-align: center;
     font-size: 30px;
-    color:rgb(25, 27, 25);
     font-weight: bold;
 }
+
 /* Styling for level 3 heading (h3) */
 h3 {
     color: gold;
     display: flex;
     justify-content: center;
 }
+
 /* Styling for container div */
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* Center the container contents horizontally */
 }
-/* Styling for specific elemnets within the container */
-.container > p, h3, h4, h5{
-    align-items: flex-center;
-    align-self: center;
 
+/* Styling for specific elements within the container */
+.container > p {
+    align-self: center;
 }
-/*  Styling for buttons */
+
+/* Styling for buttons */
 button {
     width: 120px;
-    align-items: flex-center;
-    align-self: center;
     margin-top: 10px;
     color: crimson;
     text-decoration-color: brown;
@@ -41,4 +41,53 @@ button {
     background-color: goldenrod;
     font-weight: bold;
     border-radius: 4px;
+}
+
+#dealer_div {
+    padding-top: 250px;
+}
+
+/* Media query for smaller screens (less than 768px) */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    .container {
+        max-width: 90%; /* Adjust the maximum width for smaller screens */
+    }
+
+    #dealer_div {
+        padding-top: 150px; /* Adjust padding for smaller screens */
+    }
+}
+
+/* Media query for smaller screens (14 to 18 inches) */
+@media screen and (max-width: 18in) {
+    body {
+        font-size: 20px;
+    }
+
+    button {
+        width: 100px;
+    }
+
+    #dealer_div {
+        padding-top: 200px;
+    }
+}
+
+/* Media query for larger screens (19 to 34 inches) */
+@media screen and (min-width: 19in) and (max-width: 34in) {
+    body {
+        font-size: 40px;
+    }
+
+    button {
+        width: 150px;
+    }
+
+    #dealer_div {
+        padding-top: 400px;
+    }
 }
