@@ -9,7 +9,6 @@ class BlackjackGame:
     ''' Class represeting a Blackjack game. '''
     def __init__(self):
         ''' Initiliaze the BalckjackGame Instance. '''
-        self.app = app
         self.CHIPS = 50
         self.SUM_PL_CARDS= 0
         self.SUM_DL_CARDS = 0 

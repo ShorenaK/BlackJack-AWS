@@ -76,9 +76,7 @@ Further align the game with traditional blackjack rules, ensuring a more authent
 ## Challenges:
 ![alt text](/static/images/git_image.png)
 
-The issue seems to be related to the fact that the Flask application context is not available when running the tests. In Flask, certain operations, like rendering templates or using url_for, require an active application context.  To resolve this, you can modify your BlackjackGame class to handle both Flask and non-Flask contexts. One way to do this is by separating the logic that depends on the Flask context and only running it when the context is available.
-Yes, that's correct. The modifications I suggested are focused on the render_game and new_card functions to make them more adaptable to both Flask and non-Flask contexts. By checking if the Flask app context (self.app) is available before performing context-dependent operations (like rendering templates), you can ensure that the code works seamlessly in different scenarios, including testing. Check if Flask app context is available
-with self.app.app_context():
+
 
 ## Highlights:  
 
