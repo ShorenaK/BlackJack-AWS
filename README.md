@@ -92,7 +92,7 @@ Further align the game with traditional blackjack rules, ensuring a more authent
 #### Despite these changes, a RuntimeError persisted, indicating Flask's inability to build URLs outside an active request. I think a configuration change is needed, but I haven't found the solution yet.
 
 ### Alternate Approach:
-#### To ensure unit testing functionality, I have created a separate Python file, test_blackjack.py, detached from Flask it is only for testing purposes. This file is connected to the main file, app_blackjack.py to run unittests . 
+#### To ensure unit testing functionality, I have created a separate Python file, app_blackjack.py, detached from Flask, it is only for testing purposes. This file is connected to test_blackjack.py file, to run unittests. 
 
 ![alt text](/static/images/git_test1.png)
 
