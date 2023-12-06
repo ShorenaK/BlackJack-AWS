@@ -87,23 +87,23 @@ class BlackjackGame:
         total_pl_tag = f'Total: {self.SUM_PL_CARDS}'
         # Update messages based on game logic.
         if self.SUM_DL_CARDS == 21:
-            self.MESSAGE_DL = "Table Wins Black Jack!"
-            self.MESSAGE = "Player lost!"
-            self.PLAYER['chips'] -= self.CHIPS
-            self.IS_IN_GAME = False   
+           self.MESSAGE_DL = "Table Wins Black Jack!"
+           self.MESSAGE = "Player lost!"
+           self.PLAYER['chips'] -= self.CHIPS
+           self.IS_IN_GAME = False   
         elif self.SUM_PL_CARDS == 21:
-                self.MESSAGE = "Player wins Black Jack!"
-                self.PLAYER['chips'] += self.CHIPS
-                self.HAS_BLACKJACK = True  
+             self.MESSAGE = "Player wins Black Jack!"
+             self.PLAYER['chips'] += self.CHIPS
+             self.HAS_BLACKJACK = True  
         elif self.SUM_PL_CARDS == self.SUM_DL_CARDS:
-                self.MESSAGE = "It's TIE!"  
+             self.MESSAGE = "It's TIE!"  
         elif self.SUM_PL_CARDS <= 20:
-                self.IS_IN_GAME = True
-                self.MESSAGE = "Would you like to hit?"   
+             self.IS_IN_GAME = True
+             self.MESSAGE = "Would you like to hit?"   
         elif self.SUM_PL_CARDS > 21:
-                self.MESSAGE = "Player lost a Bet!"
-                self.PLAYER['chips'] -= self.CHIPS
-                self.IS_IN_GAME = False
+             self.MESSAGE = "Player lost a Bet!"
+             self.PLAYER['chips'] -= self.CHIPS
+             self.IS_IN_GAME = False
         # Return HTML content as a response.
         return jsonify({
             'CARD_DECK_Pl': self.CARD_DECK_Pl,

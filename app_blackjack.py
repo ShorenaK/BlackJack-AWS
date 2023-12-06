@@ -70,10 +70,10 @@ class BlackjackGame:
 
         # Update messages based on game logic.
         if self.SUM_DL_CARDS == 21:
-            self.MESSAGE_DL = "Table Wins Black Jack!"
-            self.MESSAGE = "Player lost!"
-            self.PLAYER['chips'] -= self.CHIPS
-            self.IS_IN_GAME = False
+           self.MESSAGE_DL = "Table Wins Black Jack!"
+           self.MESSAGE = "Player lost!"
+           self.PLAYER['chips'] -= self.CHIPS
+           self.IS_IN_GAME = False
         elif self.SUM_PL_CARDS == 21:
             self.MESSAGE = "Player wins Black Jack!"
             self.PLAYER['chips'] += self.CHIPS
@@ -126,5 +126,3 @@ class BlackjackGame:
             'PLAYER_CHIPS': self.PLAYER['chips'],
             'CARD_DECK_Pl': self.CARD_DECK_Pl,
         }
-        
-blackjack_game = BlackjackGame(app_blackjack=None)
