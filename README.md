@@ -75,18 +75,36 @@ Further align the game with traditional blackjack rules, ensuring a more authent
 
 ## Challenges:
 
+#### I encountered challenges while running unit tests on a Python file with Flask framework.RuntimeError specifically: "Working outside of application context." Additionally, faced "Unable to build URLs outside an active request" due to missing configurations like 'SERVER_NAME' and 'APPLICATION_ROOT.
+
+### Steps Taken:
+
+-  Added Flask app context using self.app.app_context().
+-  Modified the BlackjackGame class to handle both Flask and non-Flask contexts.
+-  Separated Flask-dependent logic to run only when the context is available.
+
 ![alt text](/static/images/git_self_app1.png)
+
 ![alt text](/static/images/git_self_app2.png)
+
+### Persisting Issue:
+
+#### Despite these changes, a RuntimeError persisted, indicating Flask's inability to build URLs outside an active request. I think a configuration change is needed, but I haven't found the solution yet.
+
+### Alternate Approach:
+#### To ensure unit testing functionality, I have created a separate Python file, test_blackjack.py, detached from Flask it is only for testing purposes. This file is connected to the main file, app_blackjack.py to run unittests . 
+
 ![alt text](/static/images/git_test1.png)
+
 ![alt text](/static/images/git_test2.png)
-
-
 
 ## Highlights:  
 
 
+
 ## Developer:
 - [Shorena K. Anzhilov](https://github.com/ShorenaK)
+
 
 
 ## Support: 
