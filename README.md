@@ -74,7 +74,11 @@ Enhance the user interface to provide a visually appealing and intuitive gaming 
 Further align the game with traditional blackjack rules, ensuring a more authentic representation of the classic card game.
 
 ## Challenges:
-![alt text](/static/images/git_image.png)
+
+![alt text](/static/images/git_self_app1.png)
+![alt text](/static/images/git_self_app2.png)
+![alt text](/static/images/git_test1.png)
+![alt text](/static/images/git_test2.png)
 
 
 
