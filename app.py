@@ -91,18 +91,18 @@ class BlackjackGame:
            self.PLAYER['chips'] -= self.CHIPS
            self.IS_IN_GAME = False   
         elif self.SUM_PL_CARDS == 21:
-             self.MESSAGE = "Player wins Black Jack!"
-             self.PLAYER['chips'] += self.CHIPS
-             self.HAS_BLACKJACK = True  
+           self.MESSAGE = "Player wins Black Jack!"
+           self.PLAYER['chips'] += self.CHIPS
+           self.HAS_BLACKJACK = True  
         elif self.SUM_PL_CARDS == self.SUM_DL_CARDS:
-             self.MESSAGE = "It's TIE!"  
+           self.MESSAGE = "It's TIE!"  
         elif self.SUM_PL_CARDS <= 20:
-             self.IS_IN_GAME = True
-             self.MESSAGE = "Would you like to hit?"   
+           self.IS_IN_GAME = True
+           self.MESSAGE = "Would you like to hit?"   
         elif self.SUM_PL_CARDS > 21:
-             self.MESSAGE = "Player lost a Bet!"
-             self.PLAYER['chips'] -= self.CHIPS
-             self.IS_IN_GAME = False
+          self.MESSAGE = "Player lost a Bet!"
+          self.PLAYER['chips'] -= self.CHIPS
+          self.IS_IN_GAME = False
         # Return HTML content as a response.
         return jsonify({
             'CARD_DECK_Pl': self.CARD_DECK_Pl,
@@ -129,10 +129,10 @@ class BlackjackGame:
         player_card = None
         
         if self.IS_IN_GAME and not self.HAS_BLACKJACK:
-            player_card = self.shuffle_new_card()
-            self.SUM_PL_CARDS += player_card
-            self.CARD_DECK_Pl.append(player_card)
-            return self.render_game()
+           player_card = self.shuffle_new_card()
+           self.SUM_PL_CARDS += player_card
+           self.CARD_DECK_Pl.append(player_card)
+           return self.render_game()
         
         return jsonify({
             'SUM_DL_CARDS': self.SUM_DL_CARDS,
@@ -174,7 +174,7 @@ def game_action(action):
     if action == 'startTheGame':
        blackjack_game.start_game()
     elif action == 'newCard':
-         blackjack_game.new_card()
+       blackjack_game.new_card()
     
     # Call render_game to get updated game state
     render_content = blackjack_game.render_game()  

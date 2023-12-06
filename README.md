@@ -42,6 +42,7 @@ Frontend: The user interface is built using HTML for structure, JavaScript for d
 
 - 6. [Flask Tutorial](https://flask.palletsprojects.com/en/2.0.x/tutorial/): Step-by-step guide for getting started with Flask. A great resource if you're new to Flask development.
 - Google & Stak OverFlow.
+- reddit.
 
 ## Missing Features:
 - Multiplayer Support
