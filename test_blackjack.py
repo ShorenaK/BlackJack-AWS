@@ -17,13 +17,13 @@ class TestBlackjackGame(unittest.TestCase):
         '''Test the start_game function.'''
         # Call the start_game function to initialize the game.
         game_state = self.blackjack_game.start_game()
-        
-        #  Assertions based on the expected initilial game state.
+
+        # Assertions based on the expected initial game state.
         self.assertTrue(game_state['IS_IN_GAME'], "Game should be in progress.")
         self.assertEqual(game_state['MESSAGE'], "", "Initial message should be empty.")
         self.assertEqual(game_state['SUM_DL_CARDS'], game_state['CARD_DECK_Dl'][0] + game_state['CARD_DECK_Dl'][1], "Dealer's total should be the sum of the first two cards.")
         self.assertEqual(game_state['SUM_PL_CARDS'], game_state['CARD_DECK_Pl'][0] + game_state['CARD_DECK_Pl'][1], "Player's total should be the sum of the first two cards.")
-
+        
 
     def test_render_game(self):
         '''Test the render function'''
@@ -33,10 +33,15 @@ class TestBlackjackGame(unittest.TestCase):
         game_state = self.blackjack_game.render_game()
         
         # Assertions based on the expected rendederd game state.
-        self.assertEqual(game_state['SUM_DL_CARDS'], game_state['CARD_DECK_Dl'][0] + game_state['CARD_DECK_Dl'][1], "Dealer's total should be the sum of the first two cards.")
+        self.assertEqual(game_state['SUM_DL_CARDS'], int(game_state['CARD_DECK_Dl'][0]) + int(game_state['CARD_DECK_Dl'][1]), "Dealer's total should be the sum of the first two cards.")
+        # self.assertEqual(game_state['SUM_DL_CARDS'], game_state['CARD_DECK_Dl'][0] + game_state['CARD_DECK_Dl'][1], "Dealer's total should be the sum of the first two cards.")
         self.assertEqual(game_state['SUM_PL_CARDS'], game_state['CARD_DECK_Pl'][0] + game_state['CARD_DECK_Pl'][1], "Player's total should be the sum of the first two cards.")
         self.assertEqual(game_state['MESSAGE_DL'], "", "Dealer's message should be empty.")
         self.assertEqual(game_state['MESSAGE'], "Would you like to hit?", "Player's message should be 'Would you like to hit?'.")
+        if game_state['CARD_DECK_Dl']:
+            self.assertEqual(game_state['SUM_DL_CARDS'], int(game_state['CARD_DECK_Dl'][0]) + int(game_state['CARD_DECK_Dl'][1]), "Dealer's total should be the sum of the first two cards.")
+        else:
+            self.assertEqual(game_state['SUM_DL_CARDS'], 0, "Dealer's total should be 0.")
 
 
     def test_new_card(self):
@@ -49,7 +54,10 @@ class TestBlackjackGame(unittest.TestCase):
         
         # Assertions based on the expected new game state.
         self.assertEqual(len(game_state['CARD_DECK_Pl']), 1, "One new card should be added to the player's deck.")
+        self.assertEqual(len(game_state['CARD_DECK_Pl']), 2, "Two new cards should be added to the player's deck.")
         self.assertEqual(game_state['SUM_PL_CARDS'], game_state['CARD_DECK_Pl'][0], "Player's total should be updated correctly.")
+        self.assertEqual(game_state['SUM_DL_CARDS'], int(game_state['CARD_DECK_Dl'][0]) + int(game_state['CARD_DECK_Dl'][1]), "Dealer's total should be the sum of the first two cards.")
+        self.assertEqual(len(game_state['CARD_DECK_Pl']), 3, "One new card should be added to the player's deck.")
         self.assertEqual(game_state['MESSAGE'], "", "Player's message should be empty.")
         self.assertTrue(game_state['IS_IN_GAME'], "Game should still be in progress.")
 
