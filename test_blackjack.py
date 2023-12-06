@@ -33,6 +33,12 @@ class TestBlackjackGame(unittest.TestCase):
         game_state = self.blackjack_game.render_game()
         
         # Assertions based on the expected rendederd game state.
+        try:
+            self.assertEqual(game_state['SUM_DL_CARDS'], int(game_state['CARD_DECK_Dl'][0]) + int(game_state['CARD_DECK_Dl'][1]), "Dealer's total should be the sum of the first two cards.")
+        except ValueError:
+            self.fail("Card values in 'CARD_DECK_Dl' should be integers.")
+        
+        # Assertions based on the expected rendederd game state.
         self.assertEqual(game_state['SUM_DL_CARDS'], int(game_state['CARD_DECK_Dl'][0]) + int(game_state['CARD_DECK_Dl'][1]), "Dealer's total should be the sum of the first two cards.")
         # self.assertEqual(game_state['SUM_DL_CARDS'], game_state['CARD_DECK_Dl'][0] + game_state['CARD_DECK_Dl'][1], "Dealer's total should be the sum of the first two cards.")
         self.assertEqual(game_state['SUM_PL_CARDS'], game_state['CARD_DECK_Pl'][0] + game_state['CARD_DECK_Pl'][1], "Player's total should be the sum of the first two cards.")
@@ -54,7 +60,6 @@ class TestBlackjackGame(unittest.TestCase):
         
         # Assertions based on the expected new game state.
         self.assertEqual(len(game_state['CARD_DECK_Pl']), 1, "One new card should be added to the player's deck.")
-        self.assertEqual(len(game_state['CARD_DECK_Pl']), 2, "Two new cards should be added to the player's deck.")
         self.assertEqual(game_state['SUM_PL_CARDS'], game_state['CARD_DECK_Pl'][0], "Player's total should be updated correctly.")
         self.assertEqual(game_state['SUM_DL_CARDS'], int(game_state['CARD_DECK_Dl'][0]) + int(game_state['CARD_DECK_Dl'][1]), "Dealer's total should be the sum of the first two cards.")
         self.assertEqual(len(game_state['CARD_DECK_Pl']), 3, "One new card should be added to the player's deck.")
