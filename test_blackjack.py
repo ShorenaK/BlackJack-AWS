@@ -33,12 +33,6 @@ class TestBlackjackGame(unittest.TestCase):
         game_state = self.blackjack_game.render_game()
         
         # Assertions based on the expected rendederd game state.
-        try:
-            self.assertEqual(game_state['SUM_DL_CARDS'], int(game_state['CARD_DECK_Dl'][0]) + int(game_state['CARD_DECK_Dl'][1]), "Dealer's total should be the sum of the first two cards.")
-        except ValueError:
-            self.fail("Card values in 'CARD_DECK_Dl' should be integers.")
-        
-        # Assertions based on the expected rendederd game state.
         self.assertEqual(game_state['SUM_DL_CARDS'], int(game_state['CARD_DECK_Dl'][0]) + int(game_state['CARD_DECK_Dl'][1]), "Dealer's total should be the sum of the first two cards.")
         # self.assertEqual(game_state['SUM_DL_CARDS'], game_state['CARD_DECK_Dl'][0] + game_state['CARD_DECK_Dl'][1], "Dealer's total should be the sum of the first two cards.")
         self.assertEqual(game_state['SUM_PL_CARDS'], game_state['CARD_DECK_Pl'][0] + game_state['CARD_DECK_Pl'][1], "Player's total should be the sum of the first two cards.")
@@ -65,6 +59,26 @@ class TestBlackjackGame(unittest.TestCase):
         self.assertEqual(len(game_state['CARD_DECK_Pl']), 3, "One new card should be added to the player's deck.")
         self.assertEqual(game_state['MESSAGE'], "", "Player's message should be empty.")
         self.assertTrue(game_state['IS_IN_GAME'], "Game should still be in progress.")
+
+
+    def test_hit_multiple_cards(self):
+    # Start the game and draw three new cards for the player.
+        self.blackjack_game.start_game()
+        for _ in range(3):
+            self.blackjack_game.new_card()
+
+        # Render the game state and perform assertions.
+        game_state = self.blackjack_game.render_game()
+        self.assertEqual(len(game_state['CARD_DECK_Pl']), 5, "Player should have 5 cards.")
+        self.assertEqual(game_state['SUM_PL_CARDS'], sum(game_state['CARD_DECK_Pl']), "Player's total should be updated correctly.")
+
+        # Check if the game is still in progress or ended due to exceeding 21.
+        if game_state['SUM_PL_CARDS'] > 21:
+            self.assertFalse(game_state['IS_IN_GAME'], "Game should be over if player busts.")
+            self.assertEqual(game_state['MESSAGE'], "Player lost a Bet!", "Player's message should be 'Player lost a Bet!'")
+        else:
+            self.assertTrue(game_state['IS_IN_GAME'], "Game should still be in progress.")
+            self.assertEqual(game_state['MESSAGE'], "", "Player's message should be empty.")
 
 if __name__ == '__main__':
     unittest.main()
