@@ -100,7 +100,13 @@ Further align the game with traditional blackjack rules, ensuring a more authent
 
 ## Highlights:  
 
+- Multilingual Development: Crafted the project using a combination of Python and JavaScript.
 
+- Learning AJAX: Implemented AJAX to enhance the project's scripting capabilities.
+
+- Python Flask Framework: Leveraged the Python Flask framework for efficient development.
+
+- AWS Deployment: Successfully deployed the project on AWS, specifically on an Amazon Web Server (AWS) EC2 instance. Witnessing it live for the first time was truly fulfilling.
 
 ## Developer:
 - [Shorena K. Anzhilov](https://github.com/ShorenaK)
