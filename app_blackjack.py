@@ -1,6 +1,5 @@
 from random import randint
 
-
 class BlackjackGame:
     ''' Class representing a Blackjack game. '''
     def __init__(self):
@@ -22,7 +21,6 @@ class BlackjackGame:
 
         Returns:
         int: A random card value between 1 and 11.
-
         '''
         random_num = randint(1, 13)
         if random_num > 10:
@@ -38,7 +36,6 @@ class BlackjackGame:
 
         Returns:
         dict: Dictionary with game state.
-
         '''
         self.IS_IN_GAME = True
 
@@ -53,7 +50,6 @@ class BlackjackGame:
         card_two_dl = self.shuffle_new_card()
         self.CARD_DECK_Dl = [card_one_dl, card_two_dl]
         self.SUM_DL_CARDS = sum(self.CARD_DECK_Dl)
-        
 
         # Return a dictionary with game state.
         return self.render_game()
@@ -65,13 +61,12 @@ class BlackjackGame:
         Returns:
         dict: Dictionary with updated game state.
         '''
-
         # Update messages based on game logic.
         if self.SUM_DL_CARDS == 21:
-           self.MESSAGE_DL = "Table Wins Black Jack!"
-           self.MESSAGE = "Player lost!"
-           self.PLAYER['chips'] -= self.CHIPS
-           self.IS_IN_GAME = False
+            self.MESSAGE_DL = "Table Wins Black Jack!"
+            self.MESSAGE = "Player lost!"
+            self.PLAYER['chips'] -= self.CHIPS
+            self.IS_IN_GAME = False
         elif self.SUM_PL_CARDS == 21:
             self.MESSAGE = "Player wins Black Jack!"
             self.PLAYER['chips'] += self.CHIPS
@@ -105,7 +100,6 @@ class BlackjackGame:
         Returns:
         dict: Dictionary with updated game state.
         '''
-
         # Default value of new card.
         player_card = None
 
@@ -113,6 +107,12 @@ class BlackjackGame:
             player_card = self.shuffle_new_card()
             self.SUM_PL_CARDS += player_card
             self.CARD_DECK_Pl.append(player_card)
+
+            # Check if the player has gone over 21
+            if self.SUM_PL_CARDS > 21:
+                self.MESSAGE = "Player lost a Bet!"
+                self.PLAYER['chips'] -= self.CHIPS
+                self.IS_IN_GAME = False
 
         # Return a dictionary with updated game state.
         return {
