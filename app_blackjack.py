@@ -53,7 +53,7 @@ class BlackjackGame:
         card_two_dl = self.shuffle_new_card()
         self.CARD_DECK_Dl = [card_one_dl, card_two_dl]
         self.SUM_DL_CARDS = sum(self.CARD_DECK_Dl)
-        self.CARD_DECK_Dl = f"{card_one_dl}  {card_two_dl}"
+        
 
         # Return a dictionary with game state.
         return self.render_game()
@@ -65,8 +65,6 @@ class BlackjackGame:
         Returns:
         dict: Dictionary with updated game state.
         '''
-        total_dl_tag = f'Total: {self.SUM_DL_CARDS}'
-        total_pl_tag = f'Total: {self.SUM_PL_CARDS}'
 
         # Update messages based on game logic.
         if self.SUM_DL_CARDS == 21:

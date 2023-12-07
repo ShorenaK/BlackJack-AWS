@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, render_template
+from flask import Flask, render_template, jsonify
 from random import randint
     
 # Flask route for rendering the game page.
@@ -100,9 +100,9 @@ class BlackjackGame:
            self.IS_IN_GAME = True
            self.MESSAGE = "Would you like to hit?"   
         elif self.SUM_PL_CARDS > 21:
-          self.MESSAGE = "Player lost a Bet!"
-          self.PLAYER['chips'] -= self.CHIPS
-          self.IS_IN_GAME = False
+           self.MESSAGE = "Player lost a Bet!"
+           self.PLAYER['chips'] -= self.CHIPS
+           self.IS_IN_GAME = False
         # Return HTML content as a response.
         return jsonify({
             'CARD_DECK_Pl': self.CARD_DECK_Pl,
@@ -125,7 +125,7 @@ class BlackjackGame:
         jsonify: JSON response with updated game state.
         
         '''
-    # Default value of new card.
+       # Default value of new card.
         player_card = None
         
         if self.IS_IN_GAME and not self.HAS_BLACKJACK:
@@ -147,11 +147,13 @@ class BlackjackGame:
 # Flask route for rendering the game page.
 @app.route('/')
 def index():
+    ''' Render the game page. '''
     return render_template('index.html')
 
 # Flask route for rendering the main casino page.
 @app.route('/indexmain')
 def indexmain():
+    ''' Render the main casino page. '''
     return render_template('indexmain.html')
 
 # Create an instance of the BlackJackGame class.
