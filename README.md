@@ -17,7 +17,7 @@ A third button " End" is incorporated for navigation to the main page, and to en
 
 
 ## Go to app:
-[CLICK HERE!]()
+[CLICK HERE!](https://blackjackaws-ed3b41f97a4b.herokuapp.com/)
 
 
 ## Technologies Implemented - Tech Stack:
@@ -107,7 +107,7 @@ Further align the game with traditional blackjack rules, ensuring a more authent
 
 - Python Flask Framework: Leveraged the Python Flask framework for efficient development.
 
-- AWS Deployment: Successfully deployed the project on AWS, specifically on an Amazon Web Server (AWS) EC2 instance. Witnessing it live for the first time was truly fulfilling.
+- AWS & Heroku Deployment: Successfully deployed the project on Heroku will be deployed on AWS soon, specifically on an Amazon Web Server (AWS) EC2 instance. Witnessing it live for the first time was truly fulfilling.
 
 ## Developer:
 - [Shorena K. Anzhilov](https://github.com/ShorenaK)
