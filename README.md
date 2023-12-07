@@ -25,7 +25,7 @@ A third button " End" is incorporated for navigation to the main page, and to en
 - Server-side: Python3, Flask
 - Frontend: HTML, JavaScript (with Ajax for asynchronous requests)
 - CSS
-- Hosted and deployed on AWS (Amazon Web Services). 
+- Deployed on Heroku will be avalible on AWS (Amazon Web Services) - EC2 soon. 
 
 Description:
 
@@ -107,7 +107,7 @@ Further align the game with traditional blackjack rules, ensuring a more authent
 
 - Python Flask Framework: Leveraged the Python Flask framework for efficient development.
 
-- AWS & Heroku Deployment: Successfully deployed the project on Heroku will be deployed on AWS soon, specifically on an Amazon Web Server (AWS) EC2 instance. Witnessing it live for the first time was truly fulfilling.
+- AWS & Heroku Deployment: Successfully deployed the project on Heroku will be deployed on AWS soon, specifically on an Amazon Web Server (AWS) EC2 instance.
 
 ## Developer:
 - [Shorena K. Anzhilov](https://github.com/ShorenaK)
