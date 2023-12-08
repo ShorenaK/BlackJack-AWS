@@ -107,7 +107,7 @@ Further align the game with traditional blackjack rules, ensuring a more authent
 
 - Python Flask Framework: Leveraged the Python Flask framework for efficient development.
 
-- AWS & Heroku Deployment: Successfully deployed the project on Heroku will be deployed on AWS soon, specifically on an Amazon Web Server (AWS) EC2 instance.
+- AWS & Heroku Deployment: Successfully deployed the project on Heroku will be deployed on AWS EC2 instance soon.
 
 ## Developer:
 - [Shorena K. Anzhilov](https://github.com/ShorenaK)

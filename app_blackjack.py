@@ -1,5 +1,6 @@
 from random import randint
 
+
 class BlackjackGame:
     ''' Class representing a Blackjack game. '''
     def __init__(self):
@@ -54,6 +55,7 @@ class BlackjackGame:
         # Return a dictionary with game state.
         return self.render_game()
 
+
     def render_game(self):
         '''
         Renders the game state, updates messages, and displays cards.
@@ -92,6 +94,7 @@ class BlackjackGame:
             'PLAYER_NAME': self.PLAYER['name'],
             'PLAYER_CHIPS': self.PLAYER['chips'],
         }
+
 
     def new_card(self):
         '''
