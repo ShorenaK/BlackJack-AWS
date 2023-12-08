@@ -88,6 +88,34 @@
              }
          });
       }
+
+      function drawNewCardWithRetry(){
+        // Disable buttons during the asynchronous call
+        disableButtons()
+        // Function to handle the AJAX request
+        function makeRequest(){
+            $.ajax({
+                url: "/game_action/newCard",
+                type: "GET", 
+                dataType: "json",
+                success: function (response){
+                    console.log(response);
+                    // Update UI with the received data.
+                    updateUI(response)
+                },
+                error: function(error){
+                    console.error("Error drawing new card:", error);
+                    // Retry the request after a short delay
+                    setTimeout(makeRequest, 1000);
+                },
+                complete: function(){
+                    // Enable buttons after the asynchronous call is complete
+                    enableButtons();
+                }
+            });
+        }
+        makeRequest()
+      }
 // Function to update the user interface based on the received data.
         function updateUI(data) {
             // Update varios elements with data from the server.
