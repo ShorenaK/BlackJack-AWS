@@ -61,17 +61,18 @@ class BlackjackGame:
         self.SUM_DL_CARDS = sum(self.CARD_DECK_Dl)
         self.CARD_DECK_Dl = f"{card_one_dl}  {card_two_dl}"
         
-        # Return a JSON response with game state.
-        return jsonify({
-            'CARD_DECK_Pl': self.CARD_DECK_Pl,
-            'CARD_DECK_Dl': self.CARD_DECK_Dl,
-            'SUM_DL_CARDS': self.SUM_DL_CARDS,
-            'SUM_PL_CARDS': self.SUM_PL_CARDS,
-            'MESSAGE_DL': self.MESSAGE_DL,  
-            'MESSAGE': self.MESSAGE,
-            'PLAYER_NAME': self.PLAYER['name'],
-            'PLAYER_CHIPS': self.PLAYER['chips'],
-        })
+        # # Return a JSON response with game state.
+        # return jsonify({
+        #     'CARD_DECK_Pl': self.CARD_DECK_Pl,
+        #     'CARD_DECK_Dl': self.CARD_DECK_Dl,
+        #     'SUM_DL_CARDS': self.SUM_DL_CARDS,
+        #     'SUM_PL_CARDS': self.SUM_PL_CARDS,
+        #     'MESSAGE_DL': self.MESSAGE_DL,  
+        #     'MESSAGE': self.MESSAGE,
+        #     'PLAYER_NAME': self.PLAYER['name'],
+        #     'PLAYER_CHIPS': self.PLAYER['chips'],
+        # })
+        return self.render_game()
 
 
     def render_game(self):
