@@ -101,8 +101,10 @@ class BlackjackGame:
            self.IS_IN_GAME = True
            self.MESSAGE = "Would you like to hit?"   
         elif self.SUM_PL_CARDS > 21:
+        #    print(f"Before deduction: {self.PLAYER['chips']} chips")
            self.MESSAGE = "Player lost a Bet!"
            self.PLAYER['chips'] -= self.CHIPS
+        #    print(f"After deduction: {self.PLAYER['chips']} chips")
            self.IS_IN_GAME = False
         # Return HTML content as a response.
         return jsonify({
@@ -184,4 +186,4 @@ def game_action(action):
     return render_content
             
 if __name__ == "__main__":
-    app.run(port=8008, debug=True, use_reloader=True)
+    app.run(port=5000, debug=True, use_reloader=True)
