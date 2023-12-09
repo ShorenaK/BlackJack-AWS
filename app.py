@@ -1,6 +1,7 @@
+# Import necessary modules from Flask and Python standard library
 from flask import Flask, render_template, jsonify
 from random import randint
-    
+  
 # Flask route for rendering the game page.
 app = Flask(__name__)
 
@@ -36,7 +37,7 @@ class BlackjackGame:
             return 11
         else:
             return random_num
-    
+
 
     def start_game(self):
         '''
@@ -60,18 +61,7 @@ class BlackjackGame:
         self.CARD_DECK_Dl = [card_one_dl, card_two_dl]
         self.SUM_DL_CARDS = sum(self.CARD_DECK_Dl)
         self.CARD_DECK_Dl = f"{card_one_dl}  {card_two_dl}"
-        
-        # # Return a JSON response with game state.
-        # return jsonify({
-        #     'CARD_DECK_Pl': self.CARD_DECK_Pl,
-        #     'CARD_DECK_Dl': self.CARD_DECK_Dl,
-        #     'SUM_DL_CARDS': self.SUM_DL_CARDS,
-        #     'SUM_PL_CARDS': self.SUM_PL_CARDS,
-        #     'MESSAGE_DL': self.MESSAGE_DL,  
-        #     'MESSAGE': self.MESSAGE,
-        #     'PLAYER_NAME': self.PLAYER['name'],
-        #     'PLAYER_CHIPS': self.PLAYER['chips'],
-        # })
+
         return self.render_game()
 
 
@@ -130,13 +120,13 @@ class BlackjackGame:
         '''
        # Default value of new card.
         player_card = None
-        
+
         if self.IS_IN_GAME and not self.HAS_BLACKJACK:
            player_card = self.shuffle_new_card()
            self.SUM_PL_CARDS += player_card
            self.CARD_DECK_Pl.append(player_card)
            return self.render_game()
-        
+
         return jsonify({
             'SUM_DL_CARDS': self.SUM_DL_CARDS,
             'SUM_PL_CARDS': self.SUM_PL_CARDS,
@@ -146,6 +136,7 @@ class BlackjackGame:
             'PLAYER_CHIPS': self.PLAYER['chips'], 
             'CARD_DECK_Pl': self.CARD_DECK_Pl,    
             })
+
 
 # Flask route for rendering the game page.
 @app.route('/')
@@ -180,10 +171,11 @@ def game_action(action):
        blackjack_game.start_game()
     elif action == 'newCard':
        blackjack_game.new_card()
-    
+
     # Call render_game to get updated game state
     render_content = blackjack_game.render_game()  
     return render_content
-            
+
+   
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=False, use_reloader=False)
