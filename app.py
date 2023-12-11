@@ -62,7 +62,16 @@ class BlackjackGame:
         self.SUM_DL_CARDS = sum(self.CARD_DECK_Dl)
         self.CARD_DECK_Dl = f"{card_one_dl}  {card_two_dl}"
 
-        return self.render_game()
+        # return self.render_game()
+        return jsonify({
+            'SUM_DL_CARDS': self.SUM_DL_CARDS,
+            'SUM_PL_CARDS': self.SUM_PL_CARDS,
+            'MESSAGE_DL': self.MESSAGE_DL,
+            'MESSAGE': self.MESSAGE,
+            'PLAYER_NAME': self.PLAYER['name'],
+            'PLAYER_CHIPS': self.PLAYER['chips'], 
+            'CARD_DECK_Pl': self.CARD_DECK_Pl,    
+        })
 
 
     def render_game(self):
@@ -77,25 +86,29 @@ class BlackjackGame:
         total_pl_tag = f'Total: {self.SUM_PL_CARDS}'
         # Update messages based on game logic.
         if self.SUM_DL_CARDS == 21:
-           self.MESSAGE_DL = "Table Wins Black Jack!"
-           self.MESSAGE = "Player lost!"
-           self.PLAYER['chips'] -= self.CHIPS
-           self.IS_IN_GAME = False   
+            self.MESSAGE_DL = "Table Wins Black Jack!"
+            self.MESSAGE = "Player lost!"
+            self.PLAYER['chips'] -= self.CHIPS
+            self.IS_IN_GAME = False   
         elif self.SUM_PL_CARDS == 21:
-           self.MESSAGE = "Player wins Black Jack!"
-           self.PLAYER['chips'] += self.CHIPS
-           self.HAS_BLACKJACK = True  
+            self.MESSAGE = "Player wins Black Jack!"
+            self.PLAYER['chips'] += self.CHIPS
+            self.HAS_BLACKJACK = True  
         elif self.SUM_PL_CARDS == self.SUM_DL_CARDS:
-           self.MESSAGE = "It's TIE!"  
+            self.MESSAGE = "It's TIE!"  
         elif self.SUM_PL_CARDS <= 20:
-           self.IS_IN_GAME = True
-           self.MESSAGE = "Would you like to hit?"   
+            self.IS_IN_GAME = True
+            self.MESSAGE = "Would you like to hit?"   
         elif self.SUM_PL_CARDS > 21:
         #    print(f"Before deduction: {self.PLAYER['chips']} chips")
-           self.MESSAGE = "Player lost a Bet!"
-           self.PLAYER['chips'] -= self.CHIPS
+            self.MESSAGE = "Player lost a Bet!"
+            self.PLAYER['chips'] -= self.CHIPS
         #    print(f"After deduction: {self.PLAYER['chips']} chips")
-           self.IS_IN_GAME = False
+            self.IS_IN_GAME = False
+             # Reset chips to 1000 if they reach 0
+            if self.PLAYER['chips'] == 0:
+                self.PLAYER['chips'] = 1000
+                
         # Return HTML content as a response.
         return jsonify({
             'CARD_DECK_Pl': self.CARD_DECK_Pl,
@@ -135,7 +148,7 @@ class BlackjackGame:
             'PLAYER_NAME': self.PLAYER['name'],
             'PLAYER_CHIPS': self.PLAYER['chips'], 
             'CARD_DECK_Pl': self.CARD_DECK_Pl,    
-            })
+        })
 
 
 # Flask route for rendering the game page.
@@ -179,3 +192,4 @@ def game_action(action):
    
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=False, use_reloader=False)
+

@@ -33,20 +33,8 @@
     </div>
     <!-- JavaScript section for making asynchronous request and updating UI -->
     <script>
-    // Function to disable buttons during an asynchronous call
-    function disableButtons() {
-        $("#start_game").prop("disabled", true);
-        $("#new_card").prop("disabled", true);
-    }
-    // Function to enable buttons after an asynchronous call is complete
-    function enableButtons() {
-        $("#start_game").prop("disabled", false);
-        $("#new_card").prop("disabled", false);
-    }
     // jQuery for making asynchronous HTTP requests to start the game.
         function startGame() {
-            // Disable buttons during the asynchronous call
-            disableButtons();
             // AJAX request to start the game.
             $.ajax({
                 url: "/game_action/startTheGame",
@@ -57,19 +45,13 @@
                     // Update UI with the received data.
                     updateUI(response);
                 },
-                error: function (error) {
-                    console.log(error);
+                error: function (xhr, status, error) {
+                    console.log("Error starting the game:", xhr.responseText);
                 },
-                complete: function () {
-                // Enable buttons after the asynchronous call is complete
-                enableButtons()
-             }
-        });
-      }
+            });
+        }
     // jQuery for making asynchronous HTTP requests for new card.
         function drawNewCard() {
-            // Disable buttons during the asynchronous call
-            disableButtons();
             $.ajax({
                 url: "/game_action/newCard", 
                 type: "GET",
@@ -79,19 +61,12 @@
                     // Update UI with the receved data.
                     updateUI(response);
                 },
-                error: function (error) {
-                    console.log("Erro drawing new card:", error);
+                error: function (xhr, status, error) {
+                    console.log("Error drawing new card:", xhr.responseText);
                 },
-                complete: function () {
-                // Enable buttons after the asynchronous call is complete
-                enableButtons()
-             }
          });
     }
       function drawNewCardWithRetry() {
-      // Disable buttons during the asynchronous call
-       disableButtons();
-
     // Function to handle the AJAX request
     function makeRequest() {
         $.ajax({
@@ -104,17 +79,12 @@
                 updateUI(response);
             },
             error: function (error) {
-                console.error("Error drawing new card:", error);
+                console.error(error);
                 // Retry the request after a short delay
-                setTimeout(makeRequest, 1000);
+                setTimeout(makeRequest, 500);
             },
-            complete: function () {
-                // Enable buttons after the asynchronous call is complete
-                enableButtons();
-            }
         });
     }
-
     // Initiate the first request
     makeRequest();
 }
@@ -132,7 +102,7 @@
             $("#player_name_chips").text(data.PLAYER_NAME + " has " + data.PLAYER_CHIPS + " chips");
 
             // Enabel buttons after updateing the UI
-            enableButtons() 
+            // enableButtons() 
         }
         // Click events for startGame and drawNewCard buttons.
         $(document).ready(function () {
