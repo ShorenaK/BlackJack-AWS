@@ -9,7 +9,7 @@ app = Flask(__name__)
 class BlackjackGame:
     ''' Class represeting a Blackjack game. '''
     def __init__(self):
-        ''' Initiliaze the BalckjackGame Instance. '''
+        ''' Initialize the BlackjackGame Instance. '''
         self.CHIPS = 50
         self.SUM_PL_CARDS= 0
         self.SUM_DL_CARDS = 0 
@@ -100,10 +100,8 @@ class BlackjackGame:
             self.IS_IN_GAME = True
             self.MESSAGE = "Would you like to hit?"   
         elif self.SUM_PL_CARDS > 21:
-        #    print(f"Before deduction: {self.PLAYER['chips']} chips")
             self.MESSAGE = "Player lost a Bet!"
             self.PLAYER['chips'] -= self.CHIPS
-        #    print(f"After deduction: {self.PLAYER['chips']} chips")
             self.IS_IN_GAME = False
              # Reset chips to 1000 if they reach 0
             if self.PLAYER['chips'] == 0:
@@ -181,9 +179,9 @@ def game_action(action):
      '''
 
     if action == 'startTheGame':
-       blackjack_game.start_game()
+        blackjack_game.start_game()
     elif action == 'newCard':
-       blackjack_game.new_card()
+        blackjack_game.new_card()
 
     # Call render_game to get updated game state
     render_content = blackjack_game.render_game()  

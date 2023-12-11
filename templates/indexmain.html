@@ -66,28 +66,33 @@
                 },
          });
     }
-      function drawNewCardWithRetry() {
-    // Function to handle the AJAX request
-    function makeRequest() {
-        $.ajax({
-            url: "/game_action/newCard",
-            type: "GET",
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
-                // Update UI with the received data.
-                updateUI(response);
-            },
-            error: function (error) {
-                console.error(error);
-                // Retry the request after a short delay
-                setTimeout(makeRequest, 500);
-            },
-        });
-    }
-    // Initiate the first request
-    makeRequest();
-}
+        // Function to handle the AJAX request
+        function makeRequest() {
+            return new Promise(function (resolve, reject) {
+                $.ajax({
+                    url: "/game_action/newCard",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: reject,
+                });
+            });
+        }
+
+        function drawNewCardWithRetry() {
+            makeRequest()
+                .then(function (response) {
+                    console.log(response);
+                    updateUI(response);
+                })
+                .catch(function (error) {
+                    console.error(error);
+                    // Retry the request after a short delay
+                    setTimeout(drawNewCardWithRetry, 500);
+                });
+        }
 // Function to update the user interface based on the received data.
         function updateUI(data) {
             // Update varios elements with data from the server.
