@@ -1,1 +1,4 @@
-python-3.9.18
+Flask==3.0.0
+Werkzeug==3.0.1
+python==3.9.18
+gunicorn==21.2.0
